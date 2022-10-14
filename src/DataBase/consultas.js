@@ -42,6 +42,20 @@ export const obtenerZona = (id_asentamiento) => {
     return zona;
 }
 
+export const obtenerTodasLasZonas = () => {
+    const promesa = new Promise((resolve) => {
+        con.query('Select * from masentamiento natural join czona natural join cestado natural join cmunicipio;', (error, result) => {
+            if (error) {
+                console.error(error);
+            } else {
+                resolve(result);   
+            }
+        })
+    });
+    const zona = promesa;
+    return zona;
+}
+
 export const obtenerImagenesDePublicacion = (id_publicacion) => {
     const promesa = new Promise((resolve) => {
         con.query('Select * from mimagen where id_publicacion = '+ id_publicacion + ';', (error, result) => {
