@@ -55,3 +55,17 @@ export const obtenerImagenesDePublicacion = (id_publicacion) => {
     const imagenes = promesa;
     return imagenes;
 }
+
+export const obtenerTiposDeCategorias = () => {
+    const promesa = new Promise((resolve) => {
+        con.query('Select * from ccategoria_publicacion;', (error, result) => {
+            if (error) {
+                console.error(error);
+            } else {
+                resolve(result);   
+            }
+        })
+    });
+    const categorias = promesa;
+    return categorias;
+}
