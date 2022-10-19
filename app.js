@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { PORT } from './src/config.js';
-import { router } from './src/router.js';
+import { router } from './router.js';
 const app = express();
 
 app.set('view engine', 'ejs');

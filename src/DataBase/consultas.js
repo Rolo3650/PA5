@@ -28,6 +28,34 @@ export const obtenerComentariosDePublicacion = (id_publicacion) => {
     return comentarios;
 }
 
+export const obtenerEstados = () => {
+    const promesa = new Promise((resolve) => {
+        con.query('Select * from cestado;', (error, result) => {
+            if (error) {
+                console.error(error);
+            } else {
+                resolve(result);   
+            }
+        })
+    });
+    const estados = promesa;
+    return estados;
+}
+
+export const obtenerMunicipios = () => {
+    const promesa = new Promise((resolve) => {
+        con.query('Select * from cmunicipio;', (error, result) => {
+            if (error) {
+                console.error(error);
+            } else {
+                resolve(result);   
+            }
+        })
+    });
+    const municipios = promesa;
+    return municipios;
+}
+
 export const obtenerZona = (id_asentamiento) => {
     const promesa = new Promise((resolve) => {
         con.query('Select * from masentamiento natural join czona natural join cestado natural join cmunicipio where id_asentamiento = '+ id_asentamiento + ';', (error, result) => {
