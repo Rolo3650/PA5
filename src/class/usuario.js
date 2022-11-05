@@ -4,14 +4,16 @@ export class Usuario{
     #correo;
     #contrasenia;
     #id_persona;
+    #persona;
     #id_tipo_usuario;
     #tipo_usuario;
 
-    constructor(id_usuario, correo, contrasenia, id_persona,id_tipo_usuario, tipo_usuario){
+    constructor(id_usuario, correo, contrasenia, id_persona, persona, id_tipo_usuario, tipo_usuario){
         this.#id_usuario = id_usuario;
         this.#correo = correo;
         this.#contrasenia = contrasenia;
         this.#id_persona = id_persona;
+        this.#persona = persona;
         this.#id_tipo_usuario = id_tipo_usuario;
         this.#tipo_usuario = tipo_usuario;
     }
@@ -40,6 +42,10 @@ export class Usuario{
 
     obtenerIdPersona = () => {
         return this.#id_persona;
+    }
+
+    obtenerPersona = () => {
+        return this.#persona;
     }
 
     obtenerIdTipoUsuario = () => {

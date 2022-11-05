@@ -24,4 +24,24 @@ export class Comentario {
         }
     }
 
+    obtenerIdComentarios = () => {
+        return this.#id_comentario;
+    }
+
+    obtenerComentario = () => {
+        return this.#comentario;
+    }
+
+    obtenerFecha = () => {
+        return this.#fecha;
+    }
+
+    obtenerIdPublicacion = () => {
+        return this.#id_publicacion;
+    }
+
+    obtenerIdUsuario = () => {
+        return this.#id_usuario;
+    }
+
 }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login.css">
+    <title>Inicio de sesión</title>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-info-container">
+            <br><br><br>
+            <h1>Inica Sesión</h1>
+            <% if (nuevoIntento){
+                %>
+                <h4>Coreo y/o contraseña incorrectos, vuelve a intentarlo</h4>
+                <%
+            } %>
+            <form class="inputs-container" action="/home" method="post">
+                <input class="input" type="text" placeholder="usuario" name="correo">
+                <input class="input" type="password" placeholder="contraseña" name="contrasenia">
+                <input type="submit" class="btn" value="Iniciar Sesión">
+                <p>¿No tienes una cuenta? <span class="span"><a href="/registrarse">Registrate</a></span></p>
+            </form>
+        </div>
+        <img class="image-container" src="img/login.svg" alt="login">
+    </div>
+    
+</body>
+</html>

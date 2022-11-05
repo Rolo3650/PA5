@@ -1,6 +1,4 @@
-import { text } from "body-parser";
-
-export class Publicacion{
+export class Publicacion {
 
     #id_publicacion;
     #fecha;
@@ -9,9 +7,10 @@ export class Publicacion{
     #imagenes;
     #id_usuario;
     #id_categoria;
+    #categoria;
     #id_asentamiento;
 
-    constructor(id_publicacion, fecha, comentario_publicacion, comentarios, imagenes, id_usuario, id_categoria, id_asentamiento){
+    constructor(id_publicacion, fecha, comentario_publicacion, comentarios, imagenes, id_usuario, id_categoria, categoria, id_asentamiento) {
         this.#id_publicacion = id_publicacion;
         this.#fecha = fecha;
         this.#comentario_publicacion = comentario_publicacion;
@@ -19,17 +18,26 @@ export class Publicacion{
         this.#imagenes = imagenes;
         this.#id_usuario = id_usuario;
         this.#id_categoria = id_categoria;
+        this.#categoria = categoria;
         this.#id_asentamiento = id_asentamiento;
     }
 
     validarDatos = () => {
         const text = /(\d|\s)+/;
 
-        if (text.test(this.#comentario_publicacion)){
+        if (text.test(this.#comentario_publicacion)) {
             return true;
         } else {
             return false;
         }
+    }
+
+    inicializarComentarios = comentarios => {
+        this.#comentarios = comentarios;
+    }
+
+    inicializarImagenes = imagenes => {
+        this.#imagenes = imagenes;
     }
 
     obtenerIdPublicacion = () => {
@@ -41,7 +49,7 @@ export class Publicacion{
     }
 
     obtenerComentarioDePublicacion = () => {
-        return this.#comentario_de_publicacion;
+        return this.#comentario_publicacion;
     }
 
     obtenerComentarios = () => {
@@ -58,6 +66,10 @@ export class Publicacion{
 
     obtenerIdCategoria = () => {
         return this.#id_categoria;
+    }
+
+    obtenerCategoria = () => {
+        return this.#categoria;
     }
 
     obtenerIdAsentamiento = () => {

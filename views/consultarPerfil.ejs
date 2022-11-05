@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Perfil</title>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Correo</th>
+                <th>Tipo de Usuario</th>
+                <th>Nombre</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Sexo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <%= usuario.obtenerCorreo() %>
+                </td>
+                <td>
+                    <%= usuario.obtenerTipoUsuario() %>
+                </td>
+                <td>
+                    <%= usuario.obtenerPersona().obtenerNombre() %> 
+                </td>
+                <td>
+                    <%= usuario.obtenerPersona().obtenerAppat() %> 
+                </td>
+                <td>
+                    <%= usuario.obtenerPersona().obtenerApmat() %> 
+                </td>
+                <td>
+                    <%= usuario.obtenerPersona().obtenerFechaNacimiento() %> 
+                </td>
+                <td>
+                    <%= usuario.obtenerPersona().obtenerSexo() %> 
+                </td>
+            </tr>
+            <tr>
+                <form action="home" method="post">
+                    <input type="hidden" name="correo" value="<%= usuario.obtenerCorreo() %>">
+                    <input type="hidden" name="contrasenia" value="<%= usuario.obtenerContrasenia() %>">
+                    <td><input type="submit" value="Inicio"></td>
+                </form>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
