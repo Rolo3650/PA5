@@ -1,31 +1,36 @@
 import { con } from "./conexion.js";
+import { Consultas } from "./consultas.js";
 
-export class Insersiones {
+export class Inserciones {
+
+    #con;
+    #consultas;
+
     constructor() {
-        this.con = con;
+        this.#con = con;
+        this.#consultas = new Consultas();
     }
 
-    insertarImagen = (ruta, id_publicacion) => {
-        this.con.query('INSERT INTO `mimagen` (`ruta`, `id_publicacion`) VALUES (' + ruta + ', ' + id_publicacion + ');', (error, result) => {
-            if (error) {
-                console.error(error);
-            }
-        })
+    insertarPersonaYUsuario = async (persona, usuario) => {
+        let ultimaPersona = await this.#consultas.obtenerUltimaPersona();
+        let id_persona = ultimaPersona.obtenerIdPersona() + 1;
+
+        const promesa = new Promise((resolve) => {
+            this.#con.query("INSERT INTO `mpersona` (`id_persona`, `nombre`, `appat`, `apmat`, `fecha_nacimiento`, `id_sexo`, `id_asentamiento`) VALUES ('"+id_persona+"', '"+persona.obtenerNombre()+"', '"+persona.obtenerAppat()+"', '"+persona.obtenerApmat()+"', '"+persona.obtenerFechaNacimiento()+"', '"+persona.obtenerIdSexo()+"', '"+persona.obtenerIdAsentamiento()+"');", (error, result) => {
+                if (error) {
+                    resolve(false);
+                } else {
+                }
+            })
+            this.#con.query("INSERT INTO `mydb`.`musuario` (`id_usuario`, `correo`, `contrasenia`, `id_persona`, `id_tipo`) VALUES ('"+id_persona+"', '"+usuario.obtenerCorreo()+"', '"+usuario.obtenerContrasenia()+"', '"+id_persona+"', '1');", (error, result) => {
+                if (error) {
+                    resolve(false);
+                } else {
+                    resolve(true);
+                }
+            })
+        });
+        return promesa;
     }
 
-    insertarPublicacion = (comentario, fecha, id_usuario, id_categoria, id_asentamiento) => {
-        this.con.query('INSERT INTO `mydb`.`mpublicacion` (`comentario`, `fecha`, `id_usuario`, `id_categoria`, `id_asentamiento` VALUES (' + comentario + ', ' + fecha + ', ' + id_usuario + ', ' + id_categoria + ', ' + id_asentamiento + ');', (error, result) => {
-            if (error) {
-                console.error(error);
-            }
-        })
-    }
-
-    insertarComentario = (comentario, fecha, id_publicacion, id_usuario) => {
-        this.con.query('INSERT INTO `mydb`.`mcomentario` (`comentario`, `fecha`, `id_publicacion`, `id_usuario`) VALUES (' + comentario + ', ' + fecha + ', ' + id_publicacion + ', ' + id_usuario + ');', (error, result) => {
-            if (error) {
-                console.error(error);
-            }
-        })
-    }
 }

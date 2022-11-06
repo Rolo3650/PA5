@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --login-bg: #f8f3ff;
+    --title-bg: #452743;
+    --button-bg: #639b90;
+    --light-pink: #452743;
+    --image-bg: #fff;
+}
+
+h4, a{
+    color: var(--button-bg);
+}
+
+
+body {
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background-image: linear-gradient(to top, #639b90 0%, #f6f0e4 100%);
+    overflow: hidden;
+}
+
+.asentamiento.inactive {
+    display: none;
+}

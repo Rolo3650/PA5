@@ -1,17 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="css/registrarse.css">
+    <title>Registrarse</title>
 </head>
+
 <body>
-    <form action="registrarse" method="post">
-        <label for=""></label>
-    </form>
-    <a href="/">
-        Regresar
-    </a>
+    <div class="login-container">
+        <% if (nuevoIntento){ %>
+            <h4>Coreo ya registrado, intenta con otro</h4>
+            <% } %>
+                <% if (error){ %>
+                    <h4>Error al registrar usuario, por favor intente de nuevo</h4>
+                    <% } %>
+                        <form action="registrarse" method="post">
+                            <input type="text" name="nombre" placeholder="nombre">
+                            <input type="text" name="appat" placeholder="appat">
+                            <input type="text" name="apmat" placeholder="apmat">
+                            <input type="date" name="fecha">
+                            <select name="sexo">
+                                <option value=""></option>
+                                <option value="1">Masculino</option>
+                                <option value="2">Femenino</option>
+                                <option value="3">Otro</option>
+                                <option value="4">Indefinido</option>
+                            </select>
+                            <select name="estado">
+                                <option value="0"></option>
+                                <% estados.forEach(estado=> {
+                                    %>
+                                    <option value="<%=estado.obtenerIdEstado()%>">
+                                        <%=estado.obtenerEstado()%>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                            <select class="municipio-select" name="municipio">
+                                <option class="municipio" value="0"></option>
+                                <% municipios.forEach(municipio=> {
+                                    %>
+                                    <option value="<%=municipio.obtenerIdMunicipio()%>">
+                                        <%=municipio.obtenerMunicipio()%>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                            <select name="asentamiento" class="asentamiento-select">
+                                <option value="0"></option>
+                                <% asentamientos.forEach(asentamiento=> {
+                                    %>
+                                    <option
+                                        class="asentamiento inactive municipioId-<%=asentamiento.obtenerMunicipio().obtenerIdMunicipio()%>-"
+                                        value="<%=asentamiento.obtenerIdAsentamiento()%>">
+                                        <%=asentamiento.obtenerAsentamiento()%>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                            <input type="text" name="correo" placeholder="correo">
+                            <input type="text" name="contrasenia" placeholder="contraseña">
+                            <input type="submit">
+                        </form>
+    </div>
+    <script src="scripts/asentamiento.js"></script>
 </body>
+
 </html>

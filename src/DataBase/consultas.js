@@ -10,13 +10,15 @@ import { Usuario } from "../class/usuario.js";
 
 export class Consultas {
 
+    #con;
+
     constructor() {
-        this.con = con;
+        this.#con = con;
     }
 
     obtenerComentariosDePublicacion = (id_publicacion) => {
         const promesa = new Promise((resolve) => {
-            this.con.query('Select * from mcomentario where id_publicacion = ' + id_publicacion + ';', (error, result) => {
+            this.#con.query('Select * from mcomentario where id_publicacion = ' + id_publicacion + ';', (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
@@ -35,7 +37,7 @@ export class Consultas {
 
     obtenerEstados = () => {
         const promesa = new Promise((resolve) => {
-            this.con.query('Select * from cestado;', (error, result) => {
+            this.#con.query('Select * from cestado;', (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
@@ -52,7 +54,7 @@ export class Consultas {
 
     obtenerMunicipios = () => {
         const promesa = new Promise((resolve) => {
-            this.con.query('Select * from cmunicipio;', (error, result) => {
+            this.#con.query('Select * from cmunicipio;', (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
@@ -69,7 +71,7 @@ export class Consultas {
 
     obtenerAsentamiento = (id_asentamiento) => {
         const promesa = new Promise((resolve) => {
-            this.con.query('Select * from masentamiento natural join czona natural join cestado natural join cmunicipio natrual join ctipo_asetamiento where id_asentamiento = ' + id_asentamiento + ';', (error, result) => {
+            this.#con.query('Select * from masentamiento natural join czona natural join cestado natural join cmunicipio natrual join ctipo_asetamiento where id_asentamiento = ' + id_asentamiento + ';', (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
@@ -86,7 +88,7 @@ export class Consultas {
 
     obtenerTodosLosAentmaientos = () => {
         const promesa = new Promise((resolve) => {
-            this.con.query('Select * from masentamiento natural join czona natural join cestado natural join cmunicipio;', (error, result) => {
+            this.#con.query('Select * from masentamiento natural join czona natural join cestado natural join cmunicipio;', (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
@@ -108,7 +110,7 @@ export class Consultas {
 
     obtenerImagenesDePublicacion = (id_publicacion) => {
         const promesa = new Promise((resolve) => {
-            this.con.query('Select * from mimagen where id_publicacion = ' + id_publicacion + ';', (error, result) => {
+            this.#con.query('Select * from mimagen where id_publicacion = ' + id_publicacion + ';', (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
@@ -127,7 +129,7 @@ export class Consultas {
 
     obtenerTiposDeCategorias = () => {
         const promesa = new Promise((resolve) => {
-            this.con.query('Select * from ccategoria_publicacion;', (error, result) => {
+            this.#con.query('Select * from ccategoria_publicacion;', (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
@@ -140,7 +142,7 @@ export class Consultas {
 
     obtenerTodasLasPersonas = () => {
         const promesa = new Promise((resolve) => {
-            this.con.query('Select * from mpersona natural join csexo;', (error, result) => {
+            this.#con.query('Select * from mpersona natural join csexo;', (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
@@ -158,7 +160,7 @@ export class Consultas {
 
     obtenerPersona = (id_persona) => {
         const promesa = new Promise((resolve) => {
-            this.con.query(`Select * from mpersona natural join csexo where id_persona = ${id_persona} ;`, (error, result) => {
+            this.#con.query(`Select * from mpersona natural join csexo where id_persona = ${id_persona} ;`, (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
@@ -171,9 +173,24 @@ export class Consultas {
         return promesa;
     }
 
+    obtenerUltimaPersona = () => {
+        const promesa = new Promise((resolve) => {
+            this.#con.query(`Select * from mpersona natural join csexo order by id_persona desc;`, (error, result) => {
+                if (error) {
+                    console.error(error);
+                } else {
+                    let persona = new Persona(result[result.length - 1].id_persona, result[result.length - 1].nombre, result[result.length - 1].appat, result[result.length - 1].apmat, result[result.length - 1].fecha_nacimiento, result[result.length - 1].id_sexo, result[result.length - 1].sexo, result[result.length - 1].id_asentamiento);
+
+                    resolve(persona);
+                }
+            })
+        });
+        return promesa;
+    }
+
     obtenerTodosLosUsuarios = () => {
         const promesa = new Promise((resolve) => {
-            this.con.query('Select * from musuario natural join mpersona natural join csexo;', (error, result) => {
+            this.#con.query('Select * from musuario natural join mpersona natural join csexo;', (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
@@ -194,7 +211,7 @@ export class Consultas {
 
     obtenerUsuarioPorLogin = (correo, contrasenia) => {
         const promesa = new Promise((resolve) => {
-            this.con.query(`Select * from musuario natural join mpersona natural join csexo natural join ctipo_usuario where correo = '${correo}' and contrasenia = '${contrasenia}';`, (error, result) => {
+            this.#con.query(`Select * from musuario natural join mpersona natural join csexo natural join ctipo_usuario where correo = '${correo}' and contrasenia = '${contrasenia}';`, (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
@@ -214,9 +231,28 @@ export class Consultas {
         return promesa;
     }
 
+    obtenerUsuarioPorCorreo = (correo) => {
+        const promesa = new Promise((resolve) => {
+            this.#con.query(`Select * from musuario natural join mpersona natural join csexo natural join ctipo_usuario where correo = '${correo}';`, (error, result) => {
+                if (error) {
+                    console.error(error);
+                } else {
+
+                    if (result[0]) {
+                        resolve(true);
+                    } else {
+                        resolve(false)
+                    }
+
+                }
+            })
+        });
+        return promesa;
+    }
+
     obtenerUsuarioPorID = (id_usuario) => {
         const promesa = new Promise((resolve) => {
-            this.con.query(`Select * from musuario natural join mpersona natural join csexo natural join ctipo_usuario where id_usuario = ${id_usuario}`, (error, result) => {
+            this.#con.query(`Select * from musuario natural join mpersona natural join csexo natural join ctipo_usuario where id_usuario = ${id_usuario}`, (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
@@ -234,11 +270,11 @@ export class Consultas {
 
     obtenerTodasLasPublicaciones = () => {
         const promesa = new Promise((resolve) => {
-            this.con.query('Select * from mpublicacion natural join ccategoria_publicacion;', (error, result) => {
+            this.#con.query('Select * from mpublicacion natural join ccategoria_publicacion;', (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
-                    let publicaciones = result.map( datos => {
+                    let publicaciones = result.map(datos => {
                         let publicacion = new Publicacion(datos.id_publicacion, datos.id_fecha, datos.comentario, [], [], datos.id_usuario, datos.id_categoria, datos.categoria, datos.id_asentamiento)
                         return publicacion;
                     })
@@ -251,7 +287,7 @@ export class Consultas {
 
     obtenerTodasLasPublicacionesPorUsuario = (id_usuario) => {
         const promesa = new Promise((resolve) => {
-            this.con.query(`Select * from mpublicacion natural join ccategoria_publicacion where id_usuario = ${id_usuario};`, (error, result) => {
+            this.#con.query(`Select * from mpublicacion natural join ccategoria_publicacion where id_usuario = ${id_usuario};`, (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
@@ -271,7 +307,7 @@ export class Consultas {
 
     obtenerPublicacion = id_publicacion => {
         const promesa = new Promise((resolve) => {
-            this.con.query(`Select * from mpublicacion natural join ccategoria_publicacion where id_publicacion = ${id_publicacion};`, (error, result) => {
+            this.#con.query(`Select * from mpublicacion natural join ccategoria_publicacion where id_publicacion = ${id_publicacion};`, (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {

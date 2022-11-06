@@ -1,20 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-:root{
-    --login-bg:#f8f3ff;
-    --title-bg:#9089cc;
-    --button-bg:#674baf;
-    --light-pink:#e882e8;
-    --image-bg:#eadbff;
+
+:root {
+    --login-bg: #f8f3ff;
+    --title-bg: #452743;
+    --button-bg: #639b90;
+    --light-pink: #452743;
+    --image-bg: #fff;
 }
-body{
+
+h4, a{
+    color: var(--button-bg);
+}
+
+
+body {
     height: 100vh;
     font-family: 'Poppins', sans-serif;
-    background-image: linear-gradient(to top,#a18cd1 0%,#fbc2eb 100%);
+    background-image: linear-gradient(to top, #639b90 0%, #f6f0e4 100%);
+    overflow: hidden;
 }
-.login-container{
+
+.login-container {
     height: 43.75em;
     width: 60em;
-    margin:6em auto;
+    margin: 3em auto;
     display: flex;
     justify-content: space-between;
     overflow: hidden;
@@ -22,23 +31,38 @@ body{
 
 }
 
-.login-info-container{
+.login-info-container {
     width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding-top:0.5rem;
-    background-color:var(--login-bg) ;
+    padding-top: 0.5rem;
+    background-color: var(--login-bg);
 
 }
-.image-container{
+
+.image-container {
     width: 50%;
-    padding-top:2rem;
+    height: 96%;
+    padding-top: 2rem;
     background-color: var(--image-bg);
+    border: 1px #452743;
+
+
 
 }
-.title{
+
+.image-container img {
+    width: 30rem;
+    height: 20rem;
+    position: relative;
+    top: 0;
+    left: 0.10rem;
+    margin-top: 30%;
+}
+
+.title {
     text-transform: capitalize;
     font-size: 2.25rem;
     font-weight: 600;
@@ -46,53 +70,62 @@ body{
     color: var(--title-bg);
 
 }
-.social-login{
+
+.social-login {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
 }
-.social-login-element{
-     width: 12.5rem;
-     height: 3.75rem;
-     font-size: 1.2rem;
-     font-weight: 700;
-     letter-spacing: 0.5px;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     border-radius:5px;
-     border: 1px solid var(--button-bg);
+
+.social-login-element {
+    width: 12.5rem;
+    height: 3.75rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px solid var(--button-bg);
 }
-.social-login-element img{
+
+.social-login-element img {
     width: 1.875rem;
     height: 1.875rem;
     position: relative;
     top: 0;
     left: -0.625rem;
 }
-.social-login-element:hover{
+
+.social-login-element:hover {
     background-color: #ffff;
     cursor: pointer;
 }
-.login-info-container >p{
+
+.login-info-container>p {
     font-size: 1.25em;
     margin-top: 1.5em;
- }
- .inputs-container{
+}
+
+.inputs-container {
     height: 55%;
     width: 85%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
- }
-.input,.btn{
+}
+
+.input,
+.btn {
     width: 90%;
     height: 3.125rem;
     font-size: 1em;
 
 }
-.iput{
+
+.iput {
     padding-left: 20px;
     border: none;
     border-radius: 5px;
@@ -100,29 +133,29 @@ body{
     letter-spacing: 1px;
     box-sizing: border-box;
 }
-.input:hover{
+
+.input:hover {
     border: 2px solid var(--button-bg);
 }
-.btn{
+
+.btn {
     width: 80%;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: #fff;
-    border-radius:5px ;
-    background-color:var(--button-bg) ;
+    border-radius: 5px;
+    background-color: var(--button-bg);
     cursor: pointer;
     border: none;
     border-radius: 5px;
 }
-.inputs-container p{
+
+.inputs-container p {
     margin: 0;
 }
-.span{
-    color:var(--light-pink);
+
+.span {
+    color: var(--light-pink);
     font-weight: 600;
     cursor: pointer;
-}
-
-h4 {
-    color: var(--button-bg);
 }

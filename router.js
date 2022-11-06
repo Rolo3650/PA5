@@ -1,6 +1,9 @@
 import express from 'express';
 import { Consultas } from './src/database/consultas.js';
+import { Inserciones } from './src/database/inserciones.js';
 import { Publicacion } from './src/class/publicacion.js';
+import { Persona } from './src/class/persona.js';
+import { Usuario } from './src/class/usuario.js';
 
 export const router = express.Router();
 
@@ -22,10 +25,6 @@ router.post('/home', async (req, res) => {
 
     if (usuario) {
         let publicaciones = await consulta.obtenerTodasLasPublicaciones();
-        publicaciones.forEach(async publicacion => {
-            publicacion.inicializarComentarios(await consulta.obtenerComentariosDePublicacion(publicacion.obtenerIdPublicacion()));
-            publicacion.inicializarImagenes( await consulta.obtenerImagenesDePublicacion(publicacion.obtenerIdPublicacion()));
-        });
 
         res.render('home', {
             usuario: usuario,
@@ -44,6 +43,65 @@ router.post('/consultar-perfil', async (req, res) => {
     res.render('consultarPerfil', { usuario: usuario })
 });
 
-router.get('/registrarse', (req, res) => {
-    res.render('registrarse')
+router.get('/registrarse', async (req, res) => {
+    const consulta = new Consultas();
+
+    const estados = await consulta.obtenerEstados();
+    const municipios = await consulta.obtenerMunicipios();
+    const asentamientos = await consulta.obtenerTodosLosAentmaientos();
+
+    if (!req.query.sigIn && !req.query.error) {
+        const nuevoIntento = false;
+        const error = false;
+        res.render('registrarse', {
+            nuevoIntento: nuevoIntento,
+            error: error,
+            estados: estados,
+            municipios: municipios,
+            asentamientos: asentamientos
+        });
+    } else if (req.query.sigIn) {
+        const nuevoIntento = true;
+        const error = false;
+        res.render('registrarse', {
+            nuevoIntento: nuevoIntento,
+            error: error,
+            estados: estados,
+            municipios: municipios,
+            asentamientos: asentamientos
+        });
+
+    } else if (req.query.error) {
+        const nuevoIntento = false;
+        const error = true;
+        res.render('registrarse', {
+            nuevoIntento: nuevoIntento,
+            error: error,
+            estados: estados,
+            municipios: municipios,
+            asentamientos: asentamientos
+        });
+    }
+})
+
+router.post('/registrarse', async (req, res) => {
+    const consulta = new Consultas();
+    const inserciones = new Inserciones();
+
+    const persona = new Persona(0, req.body.nombre, req.body.appat, req.body.apmat, req.body.fecha, req.body.sexo, '', req.body.asentamiento);
+    const usuario = new Usuario(0, req.body.correo, req.body.contrasenia, 0, persona, 1, '');
+
+    const existe = await consulta.obtenerUsuarioPorCorreo(usuario.obtenerCorreo())
+
+    if (!existe) {
+        const respuesta = await inserciones.insertarPersonaYUsuario(persona, usuario);
+        if (respuesta) {
+            res.redirect('/');
+        } else {
+            res.redirect('/registrarse?error=false');
+        }
+    } else {
+        res.redirect('/registrarse?sigIn=false');
+    }
+
 })
