@@ -105,7 +105,55 @@
 
             <!-------medio----->
             <div class="middle">
-
+                <div class="container-publicaciones">
+                    <% publicaciones.forEach(publicacion=> {
+                        const fecha_publicacion = new Date(publicacion.obtenerFecha());
+                        %>
+                        <div class="container-publicacion">
+                            <div class="header-publicacion">
+                                <p><strong>
+                                        <%= publicacion.obtenerUsuario().obtenerPersona().obtenerNombre() %>
+                                    </strong>
+                                    <%= publicacion.obtenerUsuario().obtenerCorreo() %>
+                                        <%= fecha_publicacion.toLocaleString() %>
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="content-publicacion">
+                                <p class="comentario">
+                                    <%= publicacion.obtenerComentarioDePublicacion() %>
+                                </p>
+                                <img height="200" src="<%= publicacion.obtenerImagenes()[0].obtenerRuta() %>"
+                                    alt="imagen">
+                            </div>
+                            <hr>
+                            <div class="comentarios-publicacion">
+                                <h4>Comentarios</h4>
+                                <% publicacion.obtenerComentarios().forEach(comentario=> {
+                                    const fecha = new Date(comentario.obtenerFecha());
+                                    %>
+                                    <div class="header-comentario">
+                                        <p class="usuario"><strong>
+                                                <%= comentario.obtenerUsuario().obtenerPersona().obtenerNombre() %>
+                                            </strong>
+                                            <%= comentario.obtenerUsuario().obtenerCorreo() %>
+                                                <%= fecha.toLocaleString() %>
+                                        </p>
+                                    </div>
+                                    <div class="content-comentario">
+                                        <%= comentario.obtenerComentario() %>
+                                    </div>
+                                    <% }) %>
+                                        <form action="agregar-comentario" method="post">
+                                            <input type="hidden" value="<%= usuario.obtenerIdUsuario() %>" name="id_usuario">
+                                            <input type="hidden" value="<%= publicacion.obtenerIdPublicacion() %>" name="id_publicacion">
+                                            <input type="text" name="comentario" placeholder="comentar algo">
+                                            <input type="submit">
+                                        </form>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
             </div>
 
 
@@ -201,25 +249,36 @@
                                     <label>Estado:</label>
                                     <select name="Estado" id="estado">
                                         <option value=""></option>
-                                        <option value=""></option>
-                                        <option value=""></option>
-                                        <option value=""></option>
+                                        <% estados.forEach(estado=> {
+                                            %>
+                                            <option value="<%=estado.obtenerIdEstado()%>">
+                                                <%=estado.obtenerEstado()%>
+                                            </option>
+                                            <% }) %>
                                     </select>
                                     <br>
                                     <label>Municipio:</label>
-                                    <select name="Municipio" id="municipio">
+                                    <select class="municipio-select" name="Municipio" id="municipio">
                                         <option value=""></option>
-                                        <option value=""></option>
-                                        <option value=""></option>
-                                        <option value=""></option>
+                                        <% municipios.forEach(municipio=> {
+                                            %>
+                                            <option value="<%=municipio.obtenerIdMunicipio()%>">
+                                                <%=municipio.obtenerMunicipio()%>
+                                            </option>
+                                            <% }) %>
                                     </select>
                                     <br>
                                     <label>Nombre:</label>
-                                    <select name="Nombre" id="nombre">
+                                    <select class="asentamiento-select" name="Asentamiento" id="nombre">
                                         <option value=""></option>
-                                        <option value=""></option>
-                                        <option value=""></option>
-                                        <option value=""></option>
+                                        <% asentamientos.forEach(asentamiento=> {
+                                            %>
+                                            <option
+                                                class="asentamiento inactive municipioId-<%=asentamiento.obtenerMunicipio().obtenerIdMunicipio()%>-"
+                                                value="<%=asentamiento.obtenerIdAsentamiento()%>">
+                                                <%=asentamiento.obtenerAsentamiento()%>
+                                            </option>
+                                            <% }) %>
                                     </select>
                                 </div>
                                 <li><img src="img/add-image.png" class="op" id="c3"></li>
@@ -235,6 +294,7 @@
         </div>
     </div>
 
+    <script src="scripts/asentamiento.js"></script>
     <script src="scripts/home.js"></script>
 </body>
 

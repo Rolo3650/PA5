@@ -654,3 +654,12 @@ form textarea:valid~button {
         width: 92vw;
     }
 }
+
+
+.asentamiento.inactive {
+    display: none;
+}
+
+.middle{
+    text-align: center;
+}

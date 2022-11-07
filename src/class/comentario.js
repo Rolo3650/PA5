@@ -5,6 +5,7 @@ export class Comentario {
     #fecha;
     #id_publicacion;
     #id_usuario;
+    #usuario;
 
     constructor(id_comentario, comentario, fecha, id_publicacion, id_usuario) {
         this.#id_comentario = id_comentario;
@@ -22,6 +23,10 @@ export class Comentario {
         } else {
             return false;
         }
+    }
+
+    inicializarUsuario = usuario => {
+        this.#usuario = usuario;
     }
 
     obtenerIdComentarios = () => {
@@ -42,6 +47,10 @@ export class Comentario {
 
     obtenerIdUsuario = () => {
         return this.#id_usuario;
+    }
+
+    obtenerUsuario = () => {
+        return this.#usuario;
     }
 
 }

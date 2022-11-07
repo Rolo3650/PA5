@@ -270,12 +270,12 @@ export class Consultas {
 
     obtenerTodasLasPublicaciones = () => {
         const promesa = new Promise((resolve) => {
-            this.#con.query('Select * from mpublicacion natural join ccategoria_publicacion;', (error, result) => {
+            this.#con.query('Select * from mpublicacion natural join ccategoria_publicacion', (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
                     let publicaciones = result.map(datos => {
-                        let publicacion = new Publicacion(datos.id_publicacion, datos.id_fecha, datos.comentario, [], [], datos.id_usuario, datos.id_categoria, datos.categoria, datos.id_asentamiento)
+                        let publicacion = new Publicacion(datos.id_publicacion, datos.fecha, datos.comentario, [], [], datos.id_usuario, datos.id_categoria, datos.categoria, datos.id_asentamiento)
                         return publicacion;
                     })
                     resolve(publicaciones);

@@ -22,7 +22,20 @@ export class Inserciones {
                 } else {
                 }
             })
-            this.#con.query("INSERT INTO `mydb`.`musuario` (`id_usuario`, `correo`, `contrasenia`, `id_persona`, `id_tipo`) VALUES ('"+id_persona+"', '"+usuario.obtenerCorreo()+"', '"+usuario.obtenerContrasenia()+"', '"+id_persona+"', '1');", (error, result) => {
+            this.#con.query("INSERT INTO `musuario` (`id_usuario`, `correo`, `contrasenia`, `id_persona`, `id_tipo`) VALUES ('"+id_persona+"', '"+usuario.obtenerCorreo()+"', '"+usuario.obtenerContrasenia()+"', '"+id_persona+"', '1');", (error, result) => {
+                if (error) {
+                    resolve(false);
+                } else {
+                    resolve(true);
+                }
+            })
+        });
+        return promesa;
+    }
+
+    insertarComentario = async (comentario) => {
+        const promesa = new Promise((resolve) => {
+            this.#con.query("INSERT INTO `mcomentario` (`comentario`, `fecha`, `id_publicacion`, `id_usuario`) VALUES ('"+comentario.obtenerComentario()+"', '"+comentario.obtenerFecha()+"', '"+comentario.obtenerIdPublicacion()+"', '"+comentario.obtenerIdUsuario()+"');", (error, result) => {
                 if (error) {
                     resolve(false);
                 } else {

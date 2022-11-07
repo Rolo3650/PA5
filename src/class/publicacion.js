@@ -6,17 +6,19 @@ export class Publicacion {
     #comentarios;
     #imagenes;
     #id_usuario;
+    #usuario;
     #id_categoria;
     #categoria;
     #id_asentamiento;
 
-    constructor(id_publicacion, fecha, comentario_publicacion, comentarios, imagenes, id_usuario, id_categoria, categoria, id_asentamiento) {
+    constructor(id_publicacion, fecha, comentario_publicacion, comentarios, imagenes, id_usuario, usuario, id_categoria, categoria, id_asentamiento) {
         this.#id_publicacion = id_publicacion;
         this.#fecha = fecha;
         this.#comentario_publicacion = comentario_publicacion;
         this.#comentarios = comentarios;
         this.#imagenes = imagenes;
         this.#id_usuario = id_usuario;
+        this.#usuario = usuario;
         this.#id_categoria = id_categoria;
         this.#categoria = categoria;
         this.#id_asentamiento = id_asentamiento;
@@ -38,6 +40,10 @@ export class Publicacion {
 
     inicializarImagenes = imagenes => {
         this.#imagenes = imagenes;
+    }
+
+    inicializarUsuario = usuario => {
+        this.#usuario = usuario;
     }
 
     obtenerIdPublicacion = () => {
@@ -62,6 +68,10 @@ export class Publicacion {
 
     obtenerIdUsuario = () => {
         return this.#id_usuario;
+    }
+
+    obtenerUsuario= () => {
+        return this.#usuario;
     }
 
     obtenerIdCategoria = () => {
