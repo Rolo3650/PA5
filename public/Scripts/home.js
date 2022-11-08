@@ -156,3 +156,11 @@ const closeCrear = (e) => {
 }
 Crear.addEventListener('click', closeCrear);
 publi.addEventListener('click', openCrear);
+
+//onclick
+function Usuarios() {
+    location.href = "ControlUsuarios.ejs";
+}
+function BackHome() {
+    location.href = "AdminHome.ejs";
+}
