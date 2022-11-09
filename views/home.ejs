@@ -35,6 +35,7 @@
 
     <main>
         <div class="conteiner">
+            <!----------left---------->
             <div class="left">
                 <a class="profile">
                     <div class="profile-photo">
@@ -106,74 +107,85 @@
             <div class="middle">
                 <div class="container-publicaciones">
                     <% publicaciones.forEach(publicacion=> {
-                       const fecha_publicacion = new Date(publicacion.obtenerFecha());
-                    %>
-                    <div class="feeds">
-                        <div class="feed">
-                            <div class="head">
-                                <div class="user">
-                                    <div class="profile-photo">
-                                        <!--Obtener foto de perfil del usuario--><img src="img/user.png">
+                        const fecha_publicacion = new Date(publicacion.obtenerFecha());
+                        %>
+                        <div class="feeds">
+                            <div class="feed">
+                                <div class="head">
+                                    <div class="user">
+                                        <div class="profile-photo">
+                                            <!--Obtener foto de perfil del usuario--><img src="img/user.png">
+                                        </div>
+                                        <div class="info">
+                                            <h3>
+                                                <!--Nombre del usuario-->
+                                                <%= publicacion.obtenerUsuario().obtenerPersona().obtenerNombre() %> ~
+                                                    <%= publicacion.obtenerUsuario().obtenerCorreo() %>
+                                            </h3>
+                                            <small>
+                                                <!--Ubicación y hora de publicación-->
+                                                <%= fecha_publicacion.toLocaleString() %>
+                                            </small>
+                                        </div>
                                     </div>
-                                    <div class="info">
-                                        <h3><!--Nombre del usuario-->
-                                            <%= publicacion.obtenerUsuario().obtenerPersona().obtenerNombre() %> ~
-                                            <%= publicacion.obtenerUsuario().obtenerCorreo() %>
-                                        </h3>
-                                        <small><!--Ubicación y hora de publicación-->
-                                            <%= fecha_publicacion.toLocaleString() %>
-                                        </small>
-                                    </div>
-                               </div>
-                                <ul class="edit">
-                                    <li class="enc"><img src="img/opciones.png">
-                                        <!--<ul>
+                                    <ul class="edit">
+                                        <li class="enc"><img src="img/opciones.png">
+                                            <!--<ul>
                                             <li class="enc_"><a href="" class="enc"><b>Español</b></a></li>
                                             <li class="enc_"><a href="" class="enc"><b>Inglés</b></a> </li>
-                                        </ul>-->
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="photo">
-                                <h4><%= publicacion.obtenerComentarioDePublicacion() %></h4>
-                                <!--<img alt="imagen" src="<%= publicacion.obtenerImagenes()[0].obtenerRuta() %>">-->
-                                <img src="img/accidente.jpg">
-                            </div>
-                            <div class="action-buttons">
-                                <div class="interaction-buttons">
-                                    <ul class="list">
-                                        <li><img src="img/peligro.png"></li>
-                                        <li><img src="img/comentario.png"></li>
+                                        </ul>--->
+                                        </li>
                                     </ul>
                                 </div>
-                            </div>
-                            <div class="comentarios-publicacion">
-                                <% publicacion.obtenerComentarios().forEach(comentario=> {
-                                    const fecha = new Date(comentario.obtenerFecha());
-                                %>
-                                <div class="caption">
-                                    <p>
-                                        <b><%= publicacion.obtenerUsuario().obtenerPersona().obtenerNombre() %></b>
-                                        <%= fecha.toLocaleString() %>
-                                        <hr>
-                                        <%= comentario.obtenerComentario() %>
-                                    </p>
-                                <% }) %>
-                                        <form action="agregar-comentario" method="post" class="create-comment">
-                                            <input type="hidden" value="<%= usuario.obtenerIdUsuario() %>" name="id_usuario">
-                                            <input type="hidden" value="<%= publicacion.obtenerIdPublicacion() %>" name="id_publicacion">
-                                            <input type="text" name="comentario" placeholder="Escribe un Comentario..." id="create-comment" class="comment">
-                                            <input type="submit" value="Enviar" class="btn btn-primary">
-                                        </form>
-                                </div>  
+                                <div class="photo">
+                                    <h4>
+                                        <%= publicacion.obtenerComentarioDePublicacion() %>
+                                    </h4>
+                                    <!--<img alt="imagen" src="<%= publicacion.obtenerImagenes()[0].obtenerRuta() %>">-->
+                                    <img src="img/accidente.jpg">
+                                </div>
+                                <div class="action-buttons">
+                                    <div class="interaction-buttons">
+                                        <ul class="list">
+                                            <li><img src="img/peligro.png"></li>
+                                            <li><img src="img/comentario.png"></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="comentarios-publicacion">
+                                    <% publicacion.obtenerComentarios().forEach(comentario=> {
+                                        const fecha = new Date(comentario.obtenerFecha());
+                                        %>
+                                        <div class="caption">
+                                            <p>
+                                                <b>
+                                                    <%= publicacion.obtenerUsuario().obtenerPersona().obtenerNombre() %>
+                                                </b>
+                                                <%= fecha.toLocaleString() %>
+                                                    <hr>
+                                                    <%= comentario.obtenerComentario() %>
+                                            </p>
+                                            <% }) %>
+                                                <form action="agregar-comentario" method="post" class="create-comment">
+                                                    <input type="hidden" value="<%= usuario.obtenerIdUsuario() %>"
+                                                        name="id_usuario">
+                                                    <input type="hidden"
+                                                        value="<%= publicacion.obtenerIdPublicacion() %>"
+                                                        name="id_publicacion">
+                                                    <input type="text" name="comentario"
+                                                        placeholder="Escribe un Comentario..." id="create-comment"
+                                                        class="comment">
+                                                    <input type="submit" value="Enviar" class="btn btn-primary">
+                                                </form>
+                                        </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <% }) %>
-                </div>          
+                        <% }) %>
+                </div>
             </div>
+            
         </div>
-
         <!-------lado derecho----->
         <div class="right">
             <div class="messages">
@@ -189,7 +201,6 @@
                 </div>
             </div>
         </div>
-        
     </main>
 
     <!-------Customizacion----->
