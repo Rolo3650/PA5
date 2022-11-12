@@ -22,13 +22,17 @@ export class Consultas {
                 if (error) {
                     console.error(error);
                 } else {
-                    let comentarios = result.map(datos => {
-                        let comentario = new Comentario(datos.id_comentario, datos.comentario, datos.fecha, datos.id_publicacion, datos.id_usuario)
-
-                        return comentario;
-                    })
-
-                    resolve(comentarios);
+                    if (result[0]){
+                        let comentarios = result.map(datos => {
+                            let comentario = new Comentario(datos.id_comentario, datos.comentario, datos.fecha, datos.id_publicacion, datos.id_usuario)
+    
+                            return comentario;
+                        })
+    
+                        resolve(comentarios);
+                    } else {
+                        resolve(false);
+                    }
                 }
             })
         });
@@ -182,6 +186,21 @@ export class Consultas {
                     let persona = new Persona(result[result.length - 1].id_persona, result[result.length - 1].nombre, result[result.length - 1].appat, result[result.length - 1].apmat, result[result.length - 1].fecha_nacimiento, result[result.length - 1].id_sexo, result[result.length - 1].sexo, result[result.length - 1].id_asentamiento);
 
                     resolve(persona);
+                }
+            })
+        });
+        return promesa;
+    }
+
+    obtenerUltimaPublicacion = () => {
+        const promesa = new Promise((resolve) => {
+            this.#con.query(`Select * from mpublicacion;`, (error, result) => {
+                if (error) {
+                    console.error(error);
+                } else {
+                    let publicacion = new Publicacion(result[result.length-1].id_publicacion, '', '', '', '', '', '', '', '', '');
+
+                    resolve(publicacion);
                 }
             })
         });

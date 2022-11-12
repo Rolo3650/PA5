@@ -4,6 +4,8 @@ import { Inserciones } from './src/database/inserciones.js';
 import { Persona } from './src/class/persona.js';
 import { Usuario } from './src/class/usuario.js';
 import { Comentario } from './src/class/comentario.js';
+import { Publicacion } from './src/class/publicacion.js';
+import { Imagen } from './src/class/imagen.js';
 
 export const router = express.Router();
 
@@ -35,14 +37,19 @@ router.post('/home', async (req, res) => {
             const comentarios = await consulta.obtenerComentariosDePublicacion(publicaciones[i].obtenerIdPublicacion());
             const usuario = await consulta.obtenerUsuarioPorID(publicaciones[i].obtenerIdUsuario());
 
-            for (var j = 0; j < comentarios.length; j++) {
-                const usuario_comentario = await consulta.obtenerUsuarioPorID(comentarios[j].obtenerIdUsuario());
+            if (comentarios == false) {
+                publicaciones[i].inicializarComentarios([]);
+            } else {
+                for (var j = 0; j < comentarios.length; j++) {
+                    const usuario_comentario = await consulta.obtenerUsuarioPorID(comentarios[j].obtenerIdUsuario());
 
-                comentarios[j].inicializarUsuario(usuario_comentario)
+                    comentarios[j].inicializarUsuario(usuario_comentario)
+                }
+                publicaciones[i].inicializarComentarios(comentarios);
+
             }
 
             publicaciones[i].inicializarImagenes(imagenes);
-            publicaciones[i].inicializarComentarios(comentarios);
             publicaciones[i].inicializarUsuario(usuario);
         }
 
@@ -140,6 +147,23 @@ router.post('/agregar-comentario', async (req, res) => {
     const response = await insersion.insertarComentario(comentario);
 
     if (response) {
-        res.redirect(307, '/home');
     }
+})
+
+router.post('/agregar-publicacion', async (req, res) => {
+    const insertar = new Inserciones();
+
+    const comentario = req.body.comentario;
+    const fecha = new Date();
+    const fecha_normalizada = `${fecha.getFullYear()}-${fecha.getMonth()}-${fecha.getDate()} ${fecha.toLocaleTimeString()}`;
+    const id_usuario = req.body.id_usuario;
+    const id_categoria = req.body.id_categoria;
+    const id_asentamiento = req.body.id_asentamiento;
+    const ruta = req.body.ruta;
+
+    const publicacion = new Publicacion(0, fecha_normalizada, comentario, [], [], id_usuario, '', id_categoria, '', id_asentamiento);
+    const imagen = new Imagen(0, ruta, 0);
+
+    const respuesta = await insertar.insertarPublicacion(publicacion, imagen);
+    console.log(respuesta)
 })
