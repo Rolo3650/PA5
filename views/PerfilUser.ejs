@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/padmin.css">
+    <title>City Alert</title>
+</head>
+<body>
+    <!----------Barra de navegacion-->
+    <nav>
+        <div class="container">
+            <h2 class="log">
+                City Alert
+            </h2>
+            <div class="search-bar">
+                <img src="CSS/img/search.png">
+                <input type="search" placeholder="Buscar publicación">
+            </div>
+            <label class="btn btn-primary" onclick="BackHome();">Home</label>
+            <div class="create">
+                <label class="btn btn-primary" id="create-post">Crear</label>
+                <div class="profile-picture">
+                    <img class="img" src="CSS/img/user.png">
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-------fin Barra de navegacion-->
+
+
+    <main>
+        <div class="conteiner">
+            <div class="left">
+                <div class="sidebar">
+                    <a class="menu-item" id="theme">
+                        <span><img src="img/color-palette.png"></span>
+                        <h3>Tema</h3>
+                    </a>
+                </div>
+            </div>
+
+
+        <!-------medio----->
+        <div class="middle">
+            <section class="seccion-perfil-usuario">
+                <div class="perfil-usuario-header">
+                    <div class="perfil-usuario-portada">
+                        <div class="perfil-usuario-avatar">
+                            <img src="">
+                            <button type="button" class="boton-avatar">
+                                <i class="far fa-image"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="perfil-usuario-body">
+                    <div class="perfil-usuario-bio">
+                        <h3 class="titulo">User</h3>
+                        <p class="texto">
+                        <div class="options">
+                            <ul class="list">
+                                <li onclick="">Publicaciones</li>
+                                <li>Editar Perfil</li>
+                            </ul>
+                        </div>
+                        </p>
+                    </div>
+                    <div class="perfil-usuario-footer">
+                        <ul class="lista-datos">
+                            <li><i class="icono fas fa-map-signs"></i> Tipo de usuario:</li>
+                            <li><i class="icono fas fa-map-signs"></i> Nombre:</li>
+                            <li><i class="icono fas fa-map-signs"></i> Correo:</li>
+                            <li><i class="icono fas fa-map-signs"></i> Apellido Paterno:</li>
+                        </ul>
+                        <ul>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <ul class="lista-datos">
+                            <li><i class="icono fas fa-map-marker-alt"></i> Apellido Materno:</li>
+                            <li><i class="icono fas fa-calendar-alt"></i> Fecha nacimiento:</li>
+                            <li><i class="icono fas fa-map-signs"></i> Sexo:</li>
+                        </ul>
+                        <ul>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-------lado derecho----->
+        <div class="right">
+
+        </div>
+        </div>
+    </main>
+
+    <!-------Customizacion----->
+    <div class="customize-theme">
+        <div class="card">
+            <h2>Editar</h2>
+            <p class="text-muted">Maneja el fondo, colores y tamaño de letra </p>
+            <div class="font-size">
+                <h4>Tamaño de letra</h4>
+                <div>
+                    <h6>Aa</h6>
+                    <div class="choose-size">
+                        <span class="font-size-1"></span>
+                        <span class="font-size-2"></span>
+                        <span class="font-size-3"></span>
+                        <span class="font-size-4"></span>
+                        <span class="font-size-5"></span>
+                    </div>
+                    <h3>Aa</h3>
+                </div>
+            </div>
+            <div class="color">
+                <h4>Color</h4>
+                <div class="choose-color">
+                    <span class="color-1 active"></span>
+                    <span class="color-2 active"></span>
+                    <span class="color-3 active"></span>
+                </div>
+            </div>
+            <div class="background">
+                <h4>Fondo</h4>
+                <div class="choose-bg">
+                    <div class="bg-1 active">
+                        <span></span>
+                        <h5 for="bg-1">Claro</h5>
+                    </div>
+                    <div class="bg-2">
+                        <span></span>
+                        <h5 for="bg-2">Oscuro</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-------crear publicacion----->
+    <div class="o">
+        <div class="contenedor">
+            <div class="wrapper">
+                <section class="post">
+                    <header>Crear Publicación</header>
+                    <form action="#">
+                        <div class="content">
+                            <img src="img/user.png">
+                            <div class="details">
+                                <p>User</p>
+                            </div>
+                        </div>
+                        <textarea placeholder="Agrega una descripción" required></textarea>
+                        <div class="options">
+                            <p>Agrega a tu publicación</p>
+                            <ul class="list">
+                                <li><img src="img/alert-caution.png" class="op" id="c1"></li>
+                                <div class="contenido1">
+                                    <label>Categoría:</label>
+                                    <select name="Categoría" id="categoria">
+                                        <option value=""></option>
+                                        <option value="">Advertencia</option>
+                                        <option value="">Alerta</option>
+                                        <option value="">Emergencia</option>
+                                    </select>
+                                </div>
+                                <li><img src="img/location.png" class="op" id="c2"></li>
+                                <div class="contenido2">
+                                    <label>Estado:</label>
+                                    <select name="Estado" id="estado">
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                    </select>
+                                    <br>
+                                    <label>Municipio:</label>
+                                    <select name="Municipio" id="municipio">
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                    </select>
+                                    <br>
+                                    <label>Nombre:</label>
+                                    <select name="Nombre" id="nombre">
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                <li><img src="img/add-image.png" class="op" id="c3"></li>
+                                <div class="contenido3">
+                                    <input type="text" placeholder="Agrega el link de tu imagen">
+                                </div>
+                            </ul>
+                        </div>
+                        <button>Publicar</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/home.js"></script>
+</body>
+</html>
