@@ -159,8 +159,19 @@ publi.addEventListener('click', openCrear);
 
 //onclick
 function Usuarios() {
-    location.href = "ControlUsuarios.ejs";
+    location.href = "/control-usuarios";
 }
+
+function EditarPerfil() {
+    location.href = "/editar-perfil";
+}
+
+function Search() {
+    if (document.getElementById('search-value').value != '') {
+        location.href = `/home?clave=${document.getElementById('search-value').value}`;
+    }
+}
+
 function BackHome() {
-    location.href = "AdminHome.ejs";
+    location.href = "/home";
 }

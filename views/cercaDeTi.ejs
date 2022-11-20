@@ -53,9 +53,9 @@
                         <span><img src="img/home (1).png"></span>
                         <h3>Home</h3>
                     </a>
-                    <a class="menu-item" href="/cerca-de-ti">
+                    <a class="menu-item" href="/home">
                         <span><img src="img/history.png"></span>
-                        <h3>Cerca de ti</h3>
+                        <h3>Recientes</h3>
                     </a>
                     <a class="menu-item" id="notifications">
                         <span><img src="img/bell.png"></span>
@@ -105,7 +105,7 @@
             <!-------medio----->
             <div class="middle">
                 <div class="container-publicaciones">
-                    <% publicaciones.forEach(publicacion=> {
+                    <% publicaciones_cerca.forEach(publicacion=> {
                         const fecha_publicacion = new Date(publicacion.obtenerFecha());
                         %>
                         <div class="feeds">
@@ -124,7 +124,7 @@
                                             <small>
                                                 <!--Ubicación y hora de publicación-->
                                                 <%= fecha_publicacion.toLocaleString() %>
-                                                <%= publicacion.obtenerAsentamiento() %> 
+                                                    <%= publicacion.obtenerAsentamiento() %>
                                             </small>
                                         </div>
                                     </div>
@@ -152,10 +152,10 @@
                                     </div>
                                 </div>
                                 <div class="comentarios-publicacion">
-                                        <div class="caption">
-                                            <% publicacion.obtenerComentarios().forEach(comentario=> {
-                                                const fecha = new Date(comentario.obtenerFecha());
-                                                %>
+                                    <div class="caption">
+                                        <% publicacion.obtenerComentarios().forEach(comentario=> {
+                                            const fecha = new Date(comentario.obtenerFecha());
+                                            %>
                                             <p>
                                                 <b>
                                                     <%= comentario.obtenerUsuario().obtenerPersona().obtenerNombre() %>
@@ -176,7 +176,7 @@
                                                         class="comment">
                                                     <input type="submit" value="Enviar" class="btn btn-primary">
                                                 </form>
-                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -184,15 +184,15 @@
                 </div>
             </div>
 
-            
+
             <!-------lado derecho----->
             <div class="right">
                 <div class="messages">
                     <div class="heading">
-                        <h4>Cerca de ti</h4>
+                        <h4>Recientes</h4>
                     </div>
                     <div class="container-publicaciones">
-                        <% publicaciones_cerca.forEach(publicacion=> {
+                        <% publicaciones.forEach(publicacion=> {
                             const fecha_publicacion = new Date(publicacion.obtenerFecha());
                             %>
                             <div class="feeds">
@@ -209,6 +209,7 @@
                                                 <small>
                                                     <!--Ubicación y hora de publicación-->
                                                     <%= fecha_publicacion.toLocaleString() %>
+                                                        <%= publicacion.obtenerAsentamiento() %>
                                                 </small>
                                             </div>
                                         </div>

@@ -129,6 +129,12 @@ nav .create {
     gap: 2rem;
 }
 
+.post {
+    background-color: white;
+    padding: 10px 0;
+    border-radius: 10px;
+}
+
 main {
     position: relative;
     top: 5rem;
@@ -140,6 +146,7 @@ main .conteiner {
     column-gap: 2rem;
     position: relative;
 }
+
 main .conteiner .middle .all-users {
     border-radius: var(--card-border-radius);
     background-color: var(--color-white);

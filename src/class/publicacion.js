@@ -10,8 +10,9 @@ export class Publicacion {
     #id_categoria;
     #categoria;
     #id_asentamiento;
+    #asentamiento;
 
-    constructor(id_publicacion, fecha, comentario_publicacion, comentarios, imagenes, id_usuario, usuario, id_categoria, categoria, id_asentamiento) {
+    constructor(id_publicacion, fecha, comentario_publicacion, comentarios, imagenes, id_usuario, usuario, id_categoria, categoria, id_asentamiento, asentamiento) {
         this.#id_publicacion = id_publicacion;
         this.#fecha = fecha;
         this.#comentario_publicacion = comentario_publicacion;
@@ -22,6 +23,7 @@ export class Publicacion {
         this.#id_categoria = id_categoria;
         this.#categoria = categoria;
         this.#id_asentamiento = id_asentamiento;
+        this.#asentamiento = asentamiento;
     }
 
     validarDatos = () => {
@@ -84,6 +86,10 @@ export class Publicacion {
 
     obtenerIdAsentamiento = () => {
         return this.#id_asentamiento;
+    }
+
+    obtenerAsentamiento = () => {
+        return this.#asentamiento;
     }
 
 }

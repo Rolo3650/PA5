@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../public/css/editarPerfil.css">
+    <link rel="stylesheet" href="css/editarPerfil.css">
     <title>Editar Usuario</title>
 </head>
 
@@ -20,14 +20,15 @@
             </div>
             <div class="col-xl-7 col-lg12 d-flex">
                 <div class="container align-self-center">
-                    <h1 class="font-weight-bold">Edita tu usuario</h1>  
+                    <h1 class="font-weight-bold">Edita tu Perfil</h1>  
                     <% if (nuevoIntento){ %>
                         <h4>Coreo ya registrado, intenta con otro</h4>
                         <% } %>
                             <% if (error){ %>
                                 <h4>Error al registrar usuario, por favor intente de nuevo</h4>
                                 <% } %>
-                                    <form action="registrarse" method="post">
+                                    <form action="editar-perfil" method="post">
+                                        <input type="hidden" value="<%=id_usuario%>" name="id_usuario">
                                         <div class="form-row mb-3">
                                             <div class="form-group col-md-5">
                                                 <label class="font-weight-bold">Nombre<span

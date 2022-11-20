@@ -466,6 +466,16 @@ main .container .right {
     display: none;
 }
 
+#search {
+    cursor: pointer;
+}
+
+.post{
+    background-color: white;
+    padding: 10px 0;
+    border-radius: 10px;
+}
+
 .post header {
     font-size: 22px;
     font-weight: 600;

@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Libre+Baskerville&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/home.css">
-
     <title>CityAlert</title>
 </head>
 
@@ -20,23 +19,22 @@
                 City Alert
             </h2>
             <div class="search-bar">
-                <img src="img/search.png">
-                <input type="search" placeholder="Buscar publicación">
+                <img src="img/search.png" onclick="Search();" id="search">
+                <input type="search" placeholder="Buscar publicación" id="search-value">
             </div>
             <div class="create">
                 <label class="btn btn-primary" id="create-post">Crear</label>
                 <div class="profile-picture">
-                    <img class="img" src="img/user.png">
+                    <a href="/user"><img class="img" src="img/user.png"></a>
                 </div>
             </div>
         </div>
     </nav>
     <!-------fin Barra de navegacion-->
 
-
     <main>
         <div class="conteiner">
-
+            <!----------left---------->
             <div class="left">
                 <a class="profile">
                     <div class="profile-photo">
@@ -44,20 +42,20 @@
                     </div>
                     <div class="handle">
                         <h4>Usuario</h4>
-                        <p class="text-muted">
-                            @User.email
+                        <p class="text-muted" id="usuario">
+                            <%=usuario.obtenerCorreo()%>
                         </p>
                     </div>
                 </a>
 
                 <div class="sidebar">
-                    <a class="menu-item">
+                    <a class="menu-item" href="/home">
                         <span><img src="img/home (1).png"></span>
                         <h3>Home</h3>
                     </a>
                     <a class="menu-item">
                         <span><img src="img/history.png"></span>
-                        <h3>Publicaciones recientes</h3>
+                        <h3>Recientes</h3>
                     </a>
                     <a class="menu-item" id="notifications">
                         <span><img src="img/bell.png"></span>
@@ -107,7 +105,7 @@
             <!-------medio----->
             <div class="middle">
                 <div class="container-publicaciones">
-                    <% publicaciones.forEach(publicacion=> {
+                    <% mis_publicaciones.forEach(publicacion=> {
                         const fecha_publicacion = new Date(publicacion.obtenerFecha());
                         %>
                         <div class="feeds">
@@ -126,23 +124,24 @@
                                             <small>
                                                 <!--Ubicación y hora de publicación-->
                                                 <%= fecha_publicacion.toLocaleString() %>
+                                                    <%= publicacion.obtenerAsentamiento() %>
                                             </small>
                                         </div>
                                     </div>
-                                    <ul class="edit">
-                                        <li class="enc"><img src="CSS/img/opciones.png" class="trash" id="delete">
-                                            <ul>
-                                                <li class="enc_"><b>Eliminar</b></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                                    <!-- <ul class="edit">
+                                        <li class="enc"><img src="img/opciones.png"> -->
+                                    <!--<ul>
+                                            <li class="enc_"><a href="" class="enc"><b>Español</b></a></li>
+                                            <li class="enc_"><a href="" class="enc"><b>Inglés</b></a> </li>
+                                        </ul>--->
+                                    <!-- </li>
+                                    </ul> -->
                                 </div>
                                 <div class="photo">
                                     <h4>
                                         <%= publicacion.obtenerComentarioDePublicacion() %>
                                     </h4>
-                                    <!--<img alt="imagen" src="<%= publicacion.obtenerImagenes()[0].obtenerRuta() %>">-->
-                                    <img src="img/accidente.jpg">
+                                    <img alt="imagen" src="<%= publicacion.obtenerImagenes()[0].obtenerRuta() %>">
                                 </div>
                                 <div class="action-buttons">
                                     <div class="interaction-buttons">
@@ -153,13 +152,13 @@
                                     </div>
                                 </div>
                                 <div class="comentarios-publicacion">
-                                    <% publicacion.obtenerComentarios().forEach(comentario=> {
-                                        const fecha = new Date(comentario.obtenerFecha());
-                                        %>
-                                        <div class="caption">
+                                    <div class="caption">
+                                        <% publicacion.obtenerComentarios().forEach(comentario=> {
+                                            const fecha = new Date(comentario.obtenerFecha());
+                                            %>
                                             <p>
                                                 <b>
-                                                    <%= publicacion.obtenerUsuario().obtenerPersona().obtenerNombre() %>
+                                                    <%= comentario.obtenerUsuario().obtenerPersona().obtenerNombre() %>
                                                 </b>
                                                 <%= fecha.toLocaleString() %>
                                                     <hr>
@@ -177,32 +176,58 @@
                                                         class="comment">
                                                     <input type="submit" value="Enviar" class="btn btn-primary">
                                                 </form>
-                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <% }) %>
                 </div>
             </div>
-        </div>
 
 
-        <!-------lado derecho----->
-        <div class="right">
-            <div class="messages">
-                <div class="heading">
-                    <h4>Noticias destacadas</h4>
-                </div>
-                <div class="search-bar">
-                    <img src="img/search.png">
-                    <input type="search" placeholder="Buscar destacadas" id="message-search">
-                </div>
-                <div class="noticia-body">
+            <!-------lado derecho----->
+            <div class="right">
+                <div class="messages">
+                    <div class="heading">
+                        <h4>Recientes</h4>
+                    </div>
+                    <div class="container-publicaciones">
+                        <% publicaciones.forEach(publicacion=> {
+                            const fecha_publicacion = new Date(publicacion.obtenerFecha());
+                            %>
+                            <div class="feeds">
+                                <div class="feed">
+                                    <div class="head">
+                                        <div class="user">
+                                            <div class="info">
+                                                <h3>
+                                                    <!--Nombre del usuario-->
+                                                    <%= publicacion.obtenerUsuario().obtenerPersona().obtenerNombre() %>
+                                                        ~
+                                                        <%= publicacion.obtenerUsuario().obtenerCorreo() %>
+                                                </h3>
+                                                <small>
+                                                    <!--Ubicación y hora de publicación-->
+                                                    <%= fecha_publicacion.toLocaleString() %>
+                                                        <%= publicacion.obtenerAsentamiento() %>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="photo">
+                                        <h4>
+                                            <%= publicacion.obtenerComentarioDePublicacion() %>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                    </div>
+                    <div class="noticia-body">
 
+                    </div>
                 </div>
             </div>
-        </div>
-        </div>
     </main>
 
     <!-------Customizacion----->
@@ -253,25 +278,25 @@
             <div class="wrapper">
                 <section class="post">
                     <header>Crear Publicación</header>
-                    <form action="#">
+                    <form action="agregar-publicacion" method="post">
                         <div class="content">
                             <img src="img/user.png">
                             <div class="details">
                                 <p>User</p>
                             </div>
                         </div>
-                        <textarea placeholder="Agrega una descripción" required></textarea>
+                        <textarea placeholder="Agrega una descripción" required name="comentario"></textarea>
                         <div class="options">
                             <p>Agrega a tu publicación</p>
                             <ul class="list">
                                 <li><img src="img/alert-caution.png" class="op" id="c1"></li>
                                 <div class="contenido1">
                                     <label>Categoría:</label>
-                                    <select name="Categoría" id="categoria">
+                                    <select id="categoria" name="id_categoria">
                                         <option value=""></option>
-                                        <option value="">Advertencia</option>
-                                        <option value="">Alerta</option>
-                                        <option value="">Emergencia</option>
+                                        <option value="1">Advertencia</option>
+                                        <option value="2">Alerta</option>
+                                        <option value="3">Emergencia</option>
                                     </select>
                                 </div>
                                 <li><img src="img/location.png" class="op" id="c2"></li>
@@ -299,7 +324,7 @@
                                     </select>
                                     <br>
                                     <label>Nombre:</label>
-                                    <select class="asentamiento-select" name="Asentamiento" id="nombre">
+                                    <select class="asentamiento-select" name="id_asentamiento" id="nombre">
                                         <option value=""></option>
                                         <% asentamientos.forEach(asentamiento=> {
                                             %>
@@ -313,20 +338,19 @@
                                 </div>
                                 <li><img src="img/add-image.png" class="op" id="c3"></li>
                                 <div class="contenido3">
-                                    <input type="text" placeholder="Agrega el link de tu imagen">
+                                    <input type="text" placeholder="Agrega el link de tu imagen" name="ruta">
                                 </div>
                             </ul>
                         </div>
-                        <button>Publicar</button>
+                        <button id="btn-publicar">Publicar</button>
+                        <input type="hidden" name="id_usuario" value="<%= usuario.obtenerIdUsuario() %>">
                     </form>
                 </section>
             </div>
         </div>
     </div>
-
-    <script src="scripts/asentamiento.js"></script>
-    <script src="scripts/home.js"></script>
-    <script src="scripts/AdminHome.js"></script>
+    <script src="Scripts/asentamiento.js"></script>
+    <script src="Scripts/home.js"></script>
 </body>
 
 </html>

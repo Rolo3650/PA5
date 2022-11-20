@@ -18,17 +18,17 @@ export class Consultas {
 
     obtenerComentariosDePublicacion = (id_publicacion) => {
         const promesa = new Promise((resolve) => {
-            this.#con.query('Select * from mcomentario where id_publicacion = ' + id_publicacion + ';', (error, result) => {
+            this.#con.query('Select * from mcomentario where id_publicacion = ' + id_publicacion + ' order by fecha desc;', (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
-                    if (result[0]){
+                    if (result[0]) {
                         let comentarios = result.map(datos => {
                             let comentario = new Comentario(datos.id_comentario, datos.comentario, datos.fecha, datos.id_publicacion, datos.id_usuario)
-    
+
                             return comentario;
                         })
-    
+
                         resolve(comentarios);
                     } else {
                         resolve(false);
@@ -198,7 +198,7 @@ export class Consultas {
                 if (error) {
                     console.error(error);
                 } else {
-                    let publicacion = new Publicacion(result[result.length-1].id_publicacion, '', '', '', '', '', '', '', '', '');
+                    let publicacion = new Publicacion(result[result.length - 1].id_publicacion, '', '', '', '', '', '', '', '', '');
 
                     resolve(publicacion);
                 }
@@ -289,12 +289,29 @@ export class Consultas {
 
     obtenerTodasLasPublicaciones = () => {
         const promesa = new Promise((resolve) => {
-            this.#con.query('Select * from mpublicacion natural join ccategoria_publicacion', (error, result) => {
+            this.#con.query('Select * from mpublicacion as pu natural join ccategoria_publicacion inner join masentamiento as ae on ae.id_asentamiento = pu.id_asentamiento order by fecha desc', (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
                     let publicaciones = result.map(datos => {
-                        let publicacion = new Publicacion(datos.id_publicacion, datos.fecha, datos.comentario, [], [], datos.id_usuario, datos.id_categoria, datos.categoria, datos.id_asentamiento)
+                        let publicacion = new Publicacion(datos.id_publicacion, datos.fecha, datos.comentario, [], [], datos.id_usuario, [], datos.id_categoria, datos.categoria, datos.id_asentamiento, datos.asentamiento)
+                        return publicacion;
+                    })
+                    resolve(publicaciones);
+                }
+            })
+        });
+        return promesa;
+    }
+
+    obtenerTodasLasPublicacionesPorPalabraClave = (palabra) => {
+        const promesa = new Promise((resolve) => {
+            this.#con.query("SELECT * FROM mpublicacion as pu inner join musuario as u on u.id_usuario = pu.id_usuario inner join mpersona as pe on pe.id_persona = u.id_persona inner join masentamiento as ae on ae.id_asentamiento = pu.id_asentamiento inner join ccategoria_publicacion as ca on ca.id_categoria = pu.id_categoria where nombre like '%"+palabra+"%' or appat like '%"+palabra+"%' or apmat like '%"+palabra+"%' or correo like '%"+palabra+"%' or comentario like '%"+palabra+"%' or asentamiento like '%"+palabra+"%' order by fecha desc;", (error, result) => {
+                if (error) {
+                    console.error(error);
+                } else {
+                    let publicaciones = result.map(datos => {
+                        let publicacion = new Publicacion(datos.id_publicacion, datos.fecha, datos.comentario, [], [], datos.id_usuario, [], datos.id_categoria, datos.categoria, datos.id_asentamiento, datos.asentamiento)
                         return publicacion;
                     })
                     resolve(publicaciones);
@@ -306,17 +323,31 @@ export class Consultas {
 
     obtenerTodasLasPublicacionesPorUsuario = (id_usuario) => {
         const promesa = new Promise((resolve) => {
-            this.#con.query(`Select * from mpublicacion natural join ccategoria_publicacion where id_usuario = ${id_usuario};`, (error, result) => {
+            this.#con.query('Select * from mpublicacion as pu natural join ccategoria_publicacion inner join masentamiento as ae on ae.id_asentamiento = pu.id_asentamiento where id_usuario = ' + id_usuario + ' order by fecha desc', (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
-                    let publicaciones = result.map(async datos => {
-
-                        let publicacion = new Publicacion(datos.id_publicacion, datos.id_fecha, datos.comentario, [], [], datos.id_usuario, datos.id_categoria, datos.categoria, datos.id_asentamiento)
-
+                    let publicaciones = result.map(datos => {
+                        let publicacion = new Publicacion(datos.id_publicacion, datos.fecha, datos.comentario, [], [], datos.id_usuario, [], datos.id_categoria, datos.categoria, datos.id_asentamiento, datos.asentamiento)
                         return publicacion;
                     })
+                    resolve(publicaciones);
+                }
+            })
+        });
+        return promesa;
+    }
 
+    obtenerTodasLasPublicacionesPorAsentamiento = (id_asentamiento) => {
+        const promesa = new Promise((resolve) => {
+            this.#con.query('Select * from mpublicacion as pu natural join ccategoria_publicacion inner join masentamiento as ae on ae.id_asentamiento = pu.id_asentamiento where pu.id_asentamiento = ' + id_asentamiento + ' order by fecha desc', (error, result) => {
+                if (error) {
+                    console.error(error);
+                } else {
+                    let publicaciones = result.map(datos => {
+                        let publicacion = new Publicacion(datos.id_publicacion, datos.fecha, datos.comentario, [], [], datos.id_usuario, [],datos.id_categoria, datos.categoria, datos.id_asentamiento, datos.asentamiento)
+                        return publicacion;
+                    })
                     resolve(publicaciones);
                 }
             })
@@ -331,7 +362,7 @@ export class Consultas {
                     console.error(error);
                 } else {
 
-                    let publicacion = new Publicacion(result[0].id_publicacion, result[0].id_fecha, result[0].comentario, [], [], result[0].id_usuario, result[0].id_categoria, result[0].categoria, result[0].id_asentamiento)
+                    let publicacion = new Publicacion(result[0].id_publicacion, result[0].id_fecha, result[0].comentario, [], [], result[0].id_usuario, [], result[0].id_categoria, result[0].categoria, result[0].id_asentamiento)
 
                     resolve(publicacion);
                 }
