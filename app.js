@@ -1,9 +1,15 @@
 import express from 'express';
+import { Server as WebSocketServer } from 'socket.io';
+import http from 'http';
+
 import bodyParser from 'body-parser';
 import session from 'express-session';
 import { PORT } from './src/config.js';
 import { router } from './router.js';
+
 const app = express();
+const server = http.createServer(app);
+const io = new WebSocketServer(server)
 
 app.use(express.static("public"));
 app.use(session({
@@ -20,6 +26,12 @@ app.use(bodyParser.urlencoded({
 }))
 app.use('/', router)
 
-app.listen(PORT, () => {
-    console.log('Escuchando en el puerto: ' + PORT);
+io.on('connection', socket => {
+    console.log(`nueva conexion: ${socket.id}`)
+
+    socket.on('click' , data => {
+        io.emit('click-desde-server', data)
+    })
 })
+
+server.listen(PORT)

@@ -289,12 +289,12 @@ export class Consultas {
 
     obtenerTodasLasPublicaciones = () => {
         const promesa = new Promise((resolve) => {
-            this.#con.query('Select * from mpublicacion as pu natural join ccategoria_publicacion inner join masentamiento as ae on ae.id_asentamiento = pu.id_asentamiento order by fecha desc', (error, result) => {
+            this.#con.query('Select * from mpublicacion as pu natural join ccategoria_publicacion inner join masentamiento as ae on ae.id_asentamiento = pu.id_asentamiento inner join czona as zo on zo.cp = ae.cp inner join cmunicipio as mu on mu.id_municipio = zo.id_municipio  order by fecha desc', (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
                     let publicaciones = result.map(datos => {
-                        let publicacion = new Publicacion(datos.id_publicacion, datos.fecha, datos.comentario, [], [], datos.id_usuario, [], datos.id_categoria, datos.categoria, datos.id_asentamiento, datos.asentamiento)
+                        let publicacion = new Publicacion(datos.id_publicacion, datos.fecha, datos.comentario, [], [], datos.id_usuario, [], datos.id_categoria, datos.categoria, datos.id_asentamiento, datos.asentamiento, datos.municipio)
                         return publicacion;
                     })
                     resolve(publicaciones);
@@ -306,12 +306,12 @@ export class Consultas {
 
     obtenerTodasLasPublicacionesPorPalabraClave = (palabra) => {
         const promesa = new Promise((resolve) => {
-            this.#con.query("SELECT * FROM mpublicacion as pu inner join musuario as u on u.id_usuario = pu.id_usuario inner join mpersona as pe on pe.id_persona = u.id_persona inner join masentamiento as ae on ae.id_asentamiento = pu.id_asentamiento inner join ccategoria_publicacion as ca on ca.id_categoria = pu.id_categoria where nombre like '%"+palabra+"%' or appat like '%"+palabra+"%' or apmat like '%"+palabra+"%' or correo like '%"+palabra+"%' or comentario like '%"+palabra+"%' or asentamiento like '%"+palabra+"%' order by fecha desc;", (error, result) => {
+            this.#con.query("SELECT * FROM mpublicacion as pu inner join musuario as u on u.id_usuario = pu.id_usuario inner join mpersona as pe on pe.id_persona = u.id_persona inner join masentamiento as ae on ae.id_asentamiento = pu.id_asentamiento inner join ccategoria_publicacion as ca on ca.id_categoria = pu.id_categoria inner join czona as zo on zo.cp = ae.cp inner join cmunicipio as mu on mu.id_municipio = zo.id_municipio where nombre like '%" + palabra + "%' or appat like '%" + palabra + "%' or apmat like '%" + palabra + "%' or correo like '%" + palabra + "%' or comentario like '%" + palabra + "%' or asentamiento like '%" + palabra + "%' order by fecha desc;", (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
                     let publicaciones = result.map(datos => {
-                        let publicacion = new Publicacion(datos.id_publicacion, datos.fecha, datos.comentario, [], [], datos.id_usuario, [], datos.id_categoria, datos.categoria, datos.id_asentamiento, datos.asentamiento)
+                        let publicacion = new Publicacion(datos.id_publicacion, datos.fecha, datos.comentario, [], [], datos.id_usuario, [], datos.id_categoria, datos.categoria, datos.id_asentamiento, datos.asentamiento, datos.municipio)
                         return publicacion;
                     })
                     resolve(publicaciones);
@@ -323,12 +323,12 @@ export class Consultas {
 
     obtenerTodasLasPublicacionesPorUsuario = (id_usuario) => {
         const promesa = new Promise((resolve) => {
-            this.#con.query('Select * from mpublicacion as pu natural join ccategoria_publicacion inner join masentamiento as ae on ae.id_asentamiento = pu.id_asentamiento where id_usuario = ' + id_usuario + ' order by fecha desc', (error, result) => {
+            this.#con.query('Select * from mpublicacion as pu natural join ccategoria_publicacion inner join masentamiento as ae on ae.id_asentamiento = pu.id_asentamiento inner join czona as zo on zo.cp = ae.cp inner join cmunicipio as mu on mu.id_municipio = zo.id_municipio  where id_usuario = ' + id_usuario + ' order by fecha desc', (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
                     let publicaciones = result.map(datos => {
-                        let publicacion = new Publicacion(datos.id_publicacion, datos.fecha, datos.comentario, [], [], datos.id_usuario, [], datos.id_categoria, datos.categoria, datos.id_asentamiento, datos.asentamiento)
+                        let publicacion = new Publicacion(datos.id_publicacion, datos.fecha, datos.comentario, [], [], datos.id_usuario, [], datos.id_categoria, datos.categoria, datos.id_asentamiento, datos.asentamiento, datos.municipio)
                         return publicacion;
                     })
                     resolve(publicaciones);
@@ -340,12 +340,12 @@ export class Consultas {
 
     obtenerTodasLasPublicacionesPorAsentamiento = (id_asentamiento) => {
         const promesa = new Promise((resolve) => {
-            this.#con.query('Select * from mpublicacion as pu natural join ccategoria_publicacion inner join masentamiento as ae on ae.id_asentamiento = pu.id_asentamiento where pu.id_asentamiento = ' + id_asentamiento + ' order by fecha desc', (error, result) => {
+            this.#con.query('Select * from mpublicacion as pu natural join ccategoria_publicacion inner join masentamiento as ae on ae.id_asentamiento = pu.id_asentamiento inner join czona as zo on zo.cp = ae.cp inner join cmunicipio as mu on mu.id_municipio = zo.id_municipio  where pu.id_asentamiento = ' + id_asentamiento + ' order by fecha desc', (error, result) => {
                 if (error) {
                     console.error(error);
                 } else {
                     let publicaciones = result.map(datos => {
-                        let publicacion = new Publicacion(datos.id_publicacion, datos.fecha, datos.comentario, [], [], datos.id_usuario, [],datos.id_categoria, datos.categoria, datos.id_asentamiento, datos.asentamiento)
+                        let publicacion = new Publicacion(datos.id_publicacion, datos.fecha, datos.comentario, [], [], datos.id_usuario, [], datos.id_categoria, datos.categoria, datos.id_asentamiento, datos.asentamiento, datos.municipio)
                         return publicacion;
                     })
                     resolve(publicaciones);

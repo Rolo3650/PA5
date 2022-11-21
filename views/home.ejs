@@ -8,11 +8,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Libre+Baskerville&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" />
     <title>CityAlert</title>
 </head>
 
 <body>
     <!----------Barra de navegacion-->
+    <input type="hidden" value="<%= usuario.obtenerPersona().obtenerIdAsentamiento() %>" id="asentamiento-socket">
     <nav>
         <div class="container">
             <h2 class="log">
@@ -57,35 +59,19 @@
                         <span><img src="img/history.png"></span>
                         <h3>Cerca de ti</h3>
                     </a>
-                    <a class="menu-item" id="notifications">
-                        <span><img src="img/bell.png"></span>
-                        <h3>Notificaciones</h3>
+                    <div class="menu-item" id="notifications">
+                        <span class="material-icons-outlined">
+                            notifications
+                        </span>
+                        <h3 id="notifications-title">Notificaciones</h3>
 
                         <div class="notifications-popup">
-                            <div class="profile-photo">
-                                <img src="img/user.png">
-                            </div>
                             <div class="notification-body">
-                                <b>User</b>Mensaje de notificacion
-                                <small class="text-muted">Tiempo de la notificacion</small>
-                            </div>
-                            <div class="profile-photo">
-                                <img src="img/user.png">
-                            </div>
-                            <div class="notification-body">
-                                <b>User</b>Mensaje de notificacion
-                                <small class="text-muted">Tiempo de la notificacion</small>
-                            </div>
-                            <div class="profile-photo">
-                                <img src="img/user.png">
-                            </div>
-                            <div class="notification-body">
-                                <b>User</b>Mensaje de notificacion
-                                <small class="text-muted">Tiempo de la notificacion</small>
+                                <b>Actualiza para ver nuevas publicaciones cerca de ti</b>
                             </div>
                         </div>
 
-                    </a>
+                    </div>
                     <a class="menu-item">
                         <span><img src="img/question.png"></span>
                         <h3>Ayuda</h3>
@@ -124,7 +110,8 @@
                                             <small>
                                                 <!--Ubicación y hora de publicación-->
                                                 <%= fecha_publicacion.toLocaleString() %>
-                                                <%= publicacion.obtenerAsentamiento() %> 
+                                                    <%= publicacion.obtenerMunicipio() %>
+                                                        <%= publicacion.obtenerAsentamiento() %>
                                             </small>
                                         </div>
                                     </div>
@@ -146,16 +133,29 @@
                                 <div class="action-buttons">
                                     <div class="interaction-buttons">
                                         <ul class="list">
-                                            <li><img src="img/peligro.png"></li>
-                                            <li><img src="img/comentario.png"></li>
+                                            <% 
+                                            var type= ''; 
+                                            if (publicacion.obtenerIdCategoria() == 1){
+                                                type = 'yellow'; 
+                                            } if (publicacion.obtenerIdCategoria() == 2){
+                                                type = 'orange'; 
+                                            } if (publicacion.obtenerIdCategoria() == 3){
+                                                type = 'red'; 
+                                            }
+                                            %>
+                                                <div class="<%= type %> warning">
+                                                    <span class="material-icons-outlined">
+                                                        warning_amber
+                                                    </span>
+                                                </div>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="comentarios-publicacion">
-                                        <div class="caption">
-                                            <% publicacion.obtenerComentarios().forEach(comentario=> {
-                                                const fecha = new Date(comentario.obtenerFecha());
-                                                %>
+                                    <div class="caption">
+                                        <% publicacion.obtenerComentarios().forEach(comentario=> {
+                                            const fecha = new Date(comentario.obtenerFecha());
+                                            %>
                                             <p>
                                                 <b>
                                                     <%= comentario.obtenerUsuario().obtenerPersona().obtenerNombre() %>
@@ -176,7 +176,7 @@
                                                         class="comment">
                                                     <input type="submit" value="Enviar" class="btn btn-primary">
                                                 </form>
-                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -184,7 +184,7 @@
                 </div>
             </div>
 
-            
+
             <!-------lado derecho----->
             <div class="right">
                 <div class="messages">
@@ -223,7 +223,6 @@
                             <% }) %>
                     </div>
                     <div class="noticia-body">
-
                     </div>
                 </div>
             </div>
@@ -350,6 +349,8 @@
     </div>
     <script src="Scripts/asentamiento.js"></script>
     <script src="Scripts/home.js"></script>
+    <script src="/socket.io/socket.io.min.js"></script>
+    <script src="scripts/distribuido.js"></script>
 </body>
 
 </html>

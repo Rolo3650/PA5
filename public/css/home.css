@@ -43,6 +43,22 @@ body {
     overflow-x: hidden;
 }
 
+.red {
+    color: red;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.orange {
+    color: rgb(255, 115, 0);
+}
+
+.warning span{
+    font-size: 3rem;
+}
+
 .container {
     width: 80%;
     margin: 0 auto;
@@ -181,11 +197,22 @@ main .conteiner .left .profile {
     background: var(--color-light);
 }
 
-.left .sidebar img {
+.left .sidebar span {
     font-size: 1.4rem;
-    color: var(--color-gray);
     margin-left: 2rem;
     position: relative;
+}
+
+.left .sidebar span .red{
+    animation: ring .1s infinite;
+}
+
+@keyframes ring {
+    20% {
+        transform: rotate(60deg);
+    } 40% {
+        transform: rotate(-120deg);
+    }
 }
 
 .left .sidebar img .notification-count {

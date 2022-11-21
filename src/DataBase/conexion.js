@@ -21,5 +21,4 @@ con.connect(error => {
         console.log('El error de conexión es: ' + error.message);
         return;
     } 
-    console.log('Conectado');
 })
