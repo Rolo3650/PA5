@@ -1,6 +1,6 @@
 import express from 'express';
 import { Consultas } from './src/DataBase/consultas.js';
-import { Inserciones } from './src/database/inserciones.js';
+import { Inserciones } from './src/DataBase/inserciones.js';
 import { Persona } from './src/class/persona.js';
 import { Usuario } from './src/class/usuario.js';
 import { Comentario } from './src/class/comentario.js';
