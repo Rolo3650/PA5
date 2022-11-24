@@ -22,8 +22,8 @@ router.get('/', async (req, res) => {
 
 router.post('/home', async (req, res) => {
     const consulta = new Consultas();
-    const correo = req.body.correo;
-    const contrasenia = req.body.contrasenia;
+    const correo = req.body.correo.replace(/(\<+|\>+|\'+|\{+|\}+|drop|data|base|\"+|\`+)/g, '');
+    const contrasenia = req.body.contrasenia.replace(/(\<+|\>+|\'+|\{+|\}+|drop|data|base|\"+|\`+)/g, '');
     const usuario = await consulta.obtenerUsuarioPorLogin(correo, contrasenia);
 
     if (usuario) {
@@ -97,7 +97,7 @@ router.get('/home', async (req, res) => {
         const usuario = await consulta.obtenerUsuarioPorID(req.session.id_usuario);
 
         if (usuario) {
-            if (req.query.clave){
+            if (req.query.clave) {
                 var publicaciones = await consulta.obtenerTodasLasPublicacionesPorPalabraClave(req.query.clave);
             } else {
                 var publicaciones = await consulta.obtenerTodasLasPublicaciones();
@@ -209,8 +209,8 @@ router.post('/registrarse', async (req, res) => {
     const consulta = new Consultas();
     const inserciones = new Inserciones();
 
-    const persona = new Persona(0, req.body.nombre, req.body.appat, req.body.apmat, req.body.fecha, req.body.sexo, '', req.body.asentamiento);
-    const usuario = new Usuario(0, req.body.correo, req.body.contrasenia, 0, persona, 1, '');
+    const persona = new Persona(0, req.body.nombre.replace(/(\<+|\>+|\'+|\{+|\}+|drop|data|base|\"+|\`+)/g, ''), req.body.appat.replace(/(\<+|\>+|\'+|\{+|\}+|drop|data|base|\"+|\`+)/g, ''), req.body.apmat.replace(/(\<+|\>+|\'+|\{+|\}+|drop|data|base|\"+|\`+)/g, ''), req.body.fecha, req.body.sexo, '', req.body.asentamiento);
+    const usuario = new Usuario(0, req.body.correo.replace(/(\<+|\>+|\'+|\{+|\}+|drop|data|base|\"+|\`+)/g, ''), req.body.contrasenia.replace(/(\<+|\>+|\'+|\{+|\}+|drop|data|base|\"+|\`+)/g, ''), 0, persona, 1, '');
 
     const existe = await consulta.obtenerUsuarioPorCorreo(usuario.obtenerCorreo())
 
@@ -246,13 +246,13 @@ router.post('/agregar-comentario', async (req, res) => {
 router.post('/agregar-publicacion', async (req, res) => {
     const insertar = new Inserciones();
 
-    const comentario = req.body.comentario;
+    const comentario = req.body.comentario.replace(/(\<+|\>+|\'+|\{+|\}+|drop|data|base|\"+|\`+)/g, '');
     const fecha = new Date();
     const fecha_normalizada = `${fecha.getFullYear()}-11-${fecha.getDate()} ${fecha.toLocaleTimeString()}`;
     const id_usuario = req.body.id_usuario;
     const id_categoria = req.body.id_categoria;
     const id_asentamiento = req.body.id_asentamiento;
-    const ruta = req.body.ruta;
+    const ruta = req.body.ruta.replace(/(\<+|\>+|\'+|\{+|\}+|\"+|\`+)/g, '');
 
     const publicacion = new Publicacion(0, fecha_normalizada, comentario, [], [], id_usuario, '', id_categoria, '', id_asentamiento);
     const imagen = new Imagen(0, ruta, 0);
@@ -478,8 +478,8 @@ router.post('/editar-perfil', async (req, res) => {
         const consulta = new Consultas();
         const edicion = new Ediciones();
 
-        const persona = new Persona(0, req.body.nombre, req.body.appat, req.body.apmat, req.body.fecha, req.body.sexo, '', req.body.asentamiento);
-        const usuario = new Usuario(0, req.body.correo, req.body.contrasenia, 0, persona, 1, '');
+        const persona = new Persona(0, req.body.nombre.replace(/(\<+|\>+|\'+|\{+|\}+|drop|data|base|\"+|\`+)/g, ''), req.body.appat.replace(/(\<+|\>+|\'+|\{+|\}+|drop|data|base|\"+|\`+)/g, ''), req.body.apmat.replace(/(\<+|\>+|\'+|\{+|\}+|drop|data|base|\"+|\`+)/g, ''), req.body.fecha, req.body.sexo, '', req.body.asentamiento);
+        const usuario = new Usuario(0, req.body.correo.replace(/(\<+|\>+|\'+|\{+|\}+|drop|data|base|\"+|\`+)/g, ''), req.body.contrasenia.replace(/(\<+|\>+|\'+|\{+|\}+|drop|data|base|\"+|\`+)/g, ''), 0, persona, 1, '');
 
         const existe = await consulta.obtenerUsuarioPorCorreo(usuario.obtenerCorreo())
 
