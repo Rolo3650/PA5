@@ -37,6 +37,7 @@ export class Inserciones {
         const promesa = new Promise((resolve) => {
             this.#con.query("INSERT INTO `mcomentario` (`comentario`, `fecha`, `id_publicacion`, `id_usuario`) VALUES ('" + comentario.obtenerComentario() + "', '" + comentario.obtenerFecha() + "', '" + comentario.obtenerIdPublicacion() + "', '" + comentario.obtenerIdUsuario() + "');", (error, result) => {
                 if (error) {
+                    console.log(error)
                     resolve(false);
                 } else {
                     resolve(true);
