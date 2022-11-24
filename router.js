@@ -231,8 +231,7 @@ router.post('/agregar-comentario', async (req, res) => {
     const insersion = new Inserciones();
     const consulta = new Consultas();
     const fecha = new Date();
-    console.log(fecha.getMonth());
-    const fecha_normalizada = `${fecha.getFullYear()}-11-${fecha.getDate()} ${fecha.toLocaleTimeString()}`;
+    const fecha_normalizada = `${fecha.getFullYear()}-11-${fecha.getDate()} ${fecha.toLocaleTimeString('it-IT')}`;
 
     const comentario = new Comentario(0, req.body.comentario.replace(/(\<+|\>+|\'+|\{+|\}+|drop|data|base|\"+|\`+)/g, ''), fecha_normalizada, req.body.id_publicacion, req.body.id_usuario)
     const usuario = await consulta.obtenerUsuarioPorID(req.body.id_usuario);
@@ -248,7 +247,7 @@ router.post('/agregar-publicacion', async (req, res) => {
 
     const comentario = req.body.comentario.replace(/(\<+|\>+|\'+|\{+|\}+|drop|data|base|\"+|\`+)/g, '');
     const fecha = new Date();
-    const fecha_normalizada = `${fecha.getFullYear()}-11-${fecha.getDate()} ${fecha.toLocaleTimeString()}`;
+    const fecha_normalizada = `${fecha.getFullYear()}-11-${fecha.getDate()} ${fecha.toLocaleTimeString('it-IT')}`;
     const id_usuario = req.body.id_usuario;
     const id_categoria = req.body.id_categoria;
     const id_asentamiento = req.body.id_asentamiento;
