@@ -436,7 +436,7 @@ router.get('/editar-perfil', async (req, res) => {
         if (!req.query.sigIn && !req.query.error) {
             const nuevoIntento = false;
             const error = false;
-            res.render('EditarPerfil', {
+            res.render('Editarperfil', {
                 nuevoIntento: nuevoIntento,
                 error: error,
                 id_usuario: req.session.id_usuario,
@@ -447,7 +447,7 @@ router.get('/editar-perfil', async (req, res) => {
         } else if (req.query.sigIn) {
             const nuevoIntento = true;
             const error = false;
-            res.render('EditarPerfil', {
+            res.render('Editarperfil', {
                 nuevoIntento: nuevoIntento,
                 error: error,
                 id_usuario: req.session.id_usuario,
@@ -459,7 +459,7 @@ router.get('/editar-perfil', async (req, res) => {
         } else if (req.query.error) {
             const nuevoIntento = false;
             const error = true;
-            res.render('EditarPerfil', {
+            res.render('Editarperfil', {
                 nuevoIntento: nuevoIntento,
                 error: error,
                 id_usuario: req.session.id_usuario,
