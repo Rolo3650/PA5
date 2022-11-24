@@ -6,34 +6,37 @@
     --button-bg: #639b90;
     --light-pink: #452743;
     --image-bg: #fff;
-    --color-dark:#f6f0e4 ;
-    --color-dark-xx:#639b90;
-    --color-dark-x:#452743;
-    --color-light:#ffffff;
-    --color-grey:#f5f6f8;
+    --color-dark: #f6f0e4;
+    --color-dark-xx: #639b90;
+    --color-dark-x: #452743;
+    --color-light: #ffffff;
+    --color-grey: #f5f6f8;
 }
 
-.asentamiento.inactive{
+.asentamiento.inactive {
     display: none;
 }
-h4, a{
-    color: var(--button-bg);
-} 
 
-body{
+h4,
+a {
+    color: var(--button-bg);
+}
+
+body {
     font-family: 'Poppins', sans-serif;
     font-size: 1.1rem;
     font-weight: 300;
     background-image: linear-gradient(to top, #639b90 0%, #f6f0e4 100%);
     color: var(--color-light);
     letter-spacing: .05rem;
-    color:var(--color-dark-x);
+    color: var(--color-dark-x);
 
 }
 
-.image-container{
+.image-container {
     background-color: #ffff;
 }
+
 .image-container img {
     width: 30rem;
     height: 20rem;
@@ -42,48 +45,75 @@ body{
     left: 0.01rem;
     margin-top: 30%;
 }
-.p-6{
+
+.p-6 {
     padding: 4rem 7rem;
 }
-.contact-box{
+
+.contact-box {
     margin-left: 5rem;
     padding: 4rem;
 }
-.btn-outline-dark{
+
+.btn-outline-dark {
     border: 2px solid var(--color-dark-x);
     background-color: transparent !important;
 }
-.form-control{
+
+.form-control {
     background-color: var(--color-light);
     border: 2px solid var(--color-dark-xx);
     border-radius: .2rem;
     padding: 1.5rem 1rem;
 }
-.btn{
+
+.btn {
     font-weight: 400;
     padding: 1rem 2rem;
     border-radius: 5rem;
     min-width: 10rem;
 }
-.btn{
+
+.btn {
     width: 30%;
     margin-bottom: 4rem;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color:var(--color-dark-x);
-    border-radius:5px ;
-    background-color:var(--button-bg);
+    color: var(--color-dark-x);
+    border-radius: 5px;
+    background-color: var(--button-bg);
     cursor: pointer;
     border: none;
     border-radius: 5px;
 }
-.col-xl-7{
+
+.col-xl-7 {
     background-color: white;
 
 }
-.form-group input{
+
+.form-group input {
     height: 0.5rem;
 }
-.form-group select{
+
+.form-group select {
     width: 9rem;
+}
+
+/*==========responsive============*/
+@media screen and (max-width:1200px) {
+    .image-container img {
+        display: none;
+    }
+}
+
+@media screen and (max-width:1380px) {
+    .image-container img {
+        width: 25rem;
+        height: 15rem;
+        position: relative;
+        top: 0;
+        left: 0.01rem;
+        margin-top: 50%;
+    }
 }
