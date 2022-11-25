@@ -12,7 +12,9 @@ boton.addEventListener('click', () => {
 })
 
 socket.on('click-desde-server', data => {
-    notifications.classList.add('red')
-    audio.play()
-    notifications_title.classList.add('red')
+    if (data == id_asentamiento.value) {
+        notifications.classList.add('red')
+        audio.play()
+        notifications_title.classList.add('red')
+    }
 })

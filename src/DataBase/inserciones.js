@@ -58,7 +58,7 @@ export class Inserciones {
                 } else {
                 }
             })
-            this.#con.query("INSERT INTO `mydb`.`mimagen` (`ruta`, `id_publicacion`) VALUES ('"+imagen.obtenerRuta()+"', '"+id_publicacion+"');", (error, result) => {
+            this.#con.query("INSERT INTO `mimagen` (`ruta`, `id_publicacion`) VALUES ('"+imagen.obtenerRuta()+"', '"+id_publicacion+"');", (error, result) => {
                 if (error) {
                     console.log(error)
 
