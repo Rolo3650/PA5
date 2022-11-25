@@ -13,7 +13,7 @@ export class Inserciones {
 
     insertarPersonaYUsuario = async (persona, usuario) => {
         let ultimaPersona = await this.#consultas.obtenerUltimaPersona();
-        let id_persona = ultimaPersona.obtenerIdPersona() + 1;
+        let id_persona = ultimaPersona.obtenerIdPersona() + 2;
 
         const promesa = new Promise((resolve) => {
             this.#con.query("INSERT INTO `mpersona` (`id_persona`, `nombre`, `appat`, `apmat`, `fecha_nacimiento`, `id_sexo`, `id_asentamiento`) VALUES ('" + id_persona + "', '" + persona.obtenerNombre() + "', '" + persona.obtenerAppat() + "', '" + persona.obtenerApmat() + "', '" + persona.obtenerFechaNacimiento() + "', '" + persona.obtenerIdSexo() + "', '" + persona.obtenerIdAsentamiento() + "');", (error, result) => {
