@@ -726,7 +726,16 @@ form textarea:valid~button {
 .middle .create-comment .comment{
     background: hsla(0, 0%, 100%, 0);
 }
-
+.create-comment input.btn-primary{
+    cursor: no-drop;
+    color: #bcc0c4;
+    background: #e2e5e9;
+}
+.middle .create-comment .comment:valid~.btn-primary{
+    background: var(--color-primary);
+    color: white;
+    cursor: pointer;
+}
 
 /*==========Opciones============*/
 .contenido1 {

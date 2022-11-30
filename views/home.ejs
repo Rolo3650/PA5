@@ -171,7 +171,7 @@
                                                     <input type="hidden"
                                                         value="<%= publicacion.obtenerIdPublicacion() %>"
                                                         name="id_publicacion">
-                                                    <input type="text" name="comentario"
+                                                    <input type="text" required name="comentario"
                                                         placeholder="Escribe un Comentario..." id="create-comment"
                                                         class="comment">
                                                     <input type="submit" value="Enviar" class="btn btn-primary">
@@ -290,7 +290,7 @@
                                 <li><img src="img/alert-caution.png" class="op" id="c1"></li>
                                 <div class="contenido1">
                                     <label>Categoría:</label>
-                                    <select id="categoria" name="id_categoria">
+                                    <select id="categoria" required name="id_categoria">
                                         <option value=""></option>
                                         <option value="1">Advertencia</option>
                                         <option value="2">Alerta</option>
@@ -300,7 +300,7 @@
                                 <li><img src="img/location.png" class="op" id="c2"></li>
                                 <div class="contenido2">
                                     <label>Estado:</label>
-                                    <select name="Estado" id="estado">
+                                    <select name="Estado" required id="estado">
                                         <option value=""></option>
                                         <% estados.forEach(estado=> {
                                             %>
@@ -311,7 +311,7 @@
                                     </select>
                                     <br>
                                     <label>Municipio:</label>
-                                    <select class="municipio-select" name="Municipio" id="municipio">
+                                    <select class="municipio-select" required name="Municipio" id="municipio">
                                         <option value=""></option>
                                         <% municipios.forEach(municipio=> {
                                             %>
@@ -322,7 +322,7 @@
                                     </select>
                                     <br>
                                     <label>Nombre:</label>
-                                    <select class="asentamiento-select" name="id_asentamiento" id="nombre">
+                                    <select class="asentamiento-select" required name="id_asentamiento" id="nombre">
                                         <option value=""></option>
                                         <% asentamientos.forEach(asentamiento=> {
                                             %>
@@ -336,7 +336,7 @@
                                 </div>
                                 <li><img src="img/add-image.png" class="op" id="c3"></li>
                                 <div class="contenido3">
-                                    <input type="text" placeholder="Agrega el link de tu imagen" name="ruta">
+                                    <input type="text" required placeholder="Agrega el link de tu imagen" name="ruta">
                                 </div>
                             </ul>
                         </div>
