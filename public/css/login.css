@@ -154,6 +154,17 @@ body {
     margin: 0;
 }
 
+form .btn{
+    cursor: no-drop;
+    color: #bcc0c4;
+    background: #e2e5e9;
+}
+input.input:valid~.btn{
+    background: var(--button-bg);
+    color: white;
+    cursor: pointer;
+}
+
 .span {
     color: var(--light-pink);
     font-weight: 600;

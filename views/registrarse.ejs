@@ -32,30 +32,30 @@
                                             <div class="form-group col-md-5">
                                                 <label class="font-weight-bold">Nombre<span
                                                         class="text-danger">*</span></label>
-                                                <input type="text" name="nombre" placeholder="nombre"
+                                                <input type="text" required name="nombre" placeholder="nombre"
                                                     class="form-control">
                                             </div>
                                             <div class="form-group col-md-5">
                                                 <label class="font-weight-bold">Apellido Paterno<span
                                                         class="text-danger">*</span></label>
-                                                <input type="text" name="appat" placeholder="appat"
+                                                <input type="text" name="appat" required placeholder="appat"
                                                     class="form-control">
                                             </div>
                                             <div class="form-group col-md-5">
                                                 <label class="font-weight-bold">Apellido materno<span
                                                         class="text-danger">*</span></label>
-                                                <input type="text" name="apmat" placeholder="apmat"
+                                                <input type="text" name="apmat" required placeholder="apmat"
                                                     class="form-control">
                                             </div>
                                             <div class="form-group col-md-5">
                                                 <label class="font-weight-bold">Fecha de nacimiento<span
                                                     class="text-danger">*</span></label>
-                                            <input type="date" name="fecha" class="form-control">
+                                            <input type="date" required name="fecha" class="form-control">
                                             </div>
                                             <div class="form-group col-md-5">
                                                 <label class="font-weight-bold">Sexo<span
                                                     class="text-danger">*</span></label>
-                                            <select name="sexo">
+                                            <select required name="sexo">
                                                 <option value=""></option>
                                                 <option value="1">Masculino</option>
                                                 <option value="2">Femenino</option>
@@ -66,7 +66,7 @@
                                             <div class="form-group col-md-5">
                                                 <label class="font-weight-bold">Ciudad<span
                                                     class="text-danger">*</span></label>  
-                                                <select name="estado">
+                                                <select required name="estado">
                                                     <option value="0"></option>
                                                     <% estados.forEach(estado=> {
                                                         %>
@@ -78,7 +78,7 @@
                                             </div>
                                             <div class="form-group col-md-5">
                                                 <label class="font-weight-bold">Alcaldía<span class="text-danger">*</span></label>
-                                            <select class="municipio-select" name="municipio">
+                                            <select class="municipio-select" required name="municipio">
                                                 <option class="municipio" value="0"></option>
                                                 <% municipios.forEach(municipio=> {
                                                     %>
@@ -90,7 +90,7 @@
                                             </div>
                                                 <div class="form-group col-md-5">
                                                 <label class="font-weight-bold">Asentamiento<span class="text-danger">*</span></label>
-                                               <select name="asentamiento" class="asentamiento-select">
+                                               <select required name="asentamiento" class="asentamiento-select">
                                                     <option value="0"></option>
                                                     <% asentamientos.forEach(asentamiento=> {
                                                         %>
@@ -106,12 +106,12 @@
                                            <div class="form-group col-md-5">
                                             <label class="font-weight-bold">Correo<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" name="correo" placeholder="correo" class="form-control">
+                                        <input type="text" required name="correo" placeholder="correo" class="form-control">
                                            </div>
                                            <div class="form-group col-md-5">
                                             <label class="font-weight-bold">Contraseña<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" name="contrasenia" placeholder="contraseña"
+                                        <input type="text" required name="contrasenia" placeholder="contraseña"
                                             class="form-control">
                                            </div>
                                             
