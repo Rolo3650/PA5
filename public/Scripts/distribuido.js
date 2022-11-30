@@ -12,7 +12,8 @@ boton.addEventListener('click', () => {
 })
 
 socket.on('click-desde-server', data => {
-    notifications.classList.add('red')
-    audio.play()
-    notifications_title.classList.add('red')
+        notifications.classList.add('red')
+        audio.play()
+        notifications_title.classList.add('red')
+    
 })

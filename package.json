@@ -12,6 +12,7 @@
     "nodemon": "^2.0.20",
     "socket.io": "^4.5.3"
   },
+  "type": "module",
   "name": "prueba3",
   "version": "1.0.0",
   "description": "Proyecto prototipo",

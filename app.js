@@ -13,7 +13,7 @@ const io = new WebSocketServer(server)
 
 app.use(express.static("public"));
 app.use(session({
-    secret: 'clase_super_srecreta',
+    secret: 'secreta',
     resave: true,
     saveUninitialized: true
 }))
